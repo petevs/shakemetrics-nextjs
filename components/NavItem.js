@@ -1,7 +1,7 @@
 import { UnstyledButton, Group, Avatar, Text, ThemeIcon } from '@mantine/core';
 import { IoAnalytics } from 'react-icons/io5'
 
-const MenuItem = (props) => {
+const NavItem= (props) => {
 
     const style = (theme) => ({
         width: '100%',
@@ -26,4 +26,4 @@ const MenuItem = (props) => {
   )
 }
 
-export default MenuItem
+export default NavItem
