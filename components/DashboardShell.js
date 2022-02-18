@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DashboardHeader from './DashboardHeader'
 import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core';
+import Nav from './Nav';
 
 const DashboardShell = ({ children }) => {
   const [opened, setOpened] = useState(false);
@@ -21,9 +22,9 @@ const DashboardShell = ({ children }) => {
           // when viewport size is less than theme.breakpoints.sm navbar width is 100%
           // viewport size > theme.breakpoints.sm – width is 300px
           // viewport size > theme.breakpoints.lg – width is 400px
-          width={{ sm: 300, lg: 400 }}
+          width={{ sm: 300, lg: 300 }}
         >
-          <Text>Application navbar</Text>
+          <Nav />
         </Navbar>
       }
       header={
