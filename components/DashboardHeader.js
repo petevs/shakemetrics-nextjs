@@ -1,5 +1,4 @@
 import { Box, ThemeIcon, Text, MediaQuery } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks';
 import { IoAnalytics } from 'react-icons/io5'
 import ColorModeToggle from './ColorModeToggle'
 import PriceTicker from './PriceTicker'

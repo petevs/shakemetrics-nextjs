@@ -15,6 +15,10 @@ export const fetchingHistoricalDataSuccess = (data) => {
     return { type: FETCHING_HISTORICAL_DATA_SUCCESS, payload: data}
 }
 
+export const fetchingMarketDataError = (data) => {
+    return { type: FETCHING_MARKET_DATA_ERROR, payload: data}
+}
+
 export const initialAppState = {
     marketData: {
         timestamp: null,
