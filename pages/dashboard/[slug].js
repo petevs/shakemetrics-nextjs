@@ -7,7 +7,7 @@ import { dashboardItems } from '../../data/navItems'
 export async function getStaticPaths(){
     
     const paths = dashboardItems.map(item => ({
-        params: { slug: (item.title).toLowerCase()}
+        params: { id: (item.title).toLowerCase()}
     }))
     
     
@@ -17,8 +17,20 @@ export async function getStaticPaths(){
     }
 }
 
+export async function getStaticProps({ params }) {
 
-const DashboardPage = () => {
+    const post = params.id
+
+    return {
+        props: {
+            title: post
+        }
+    }
+
+}
+
+
+const DashboardPage = (props) => {
 
     const router = useRouter()
     const { slug } = router.query
@@ -27,7 +39,7 @@ const DashboardPage = () => {
         <DashboardShell>
             <Title
             >
-                {slug}
+                {props.title}
             </Title>
         </DashboardShell>
     )
