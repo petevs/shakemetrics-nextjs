@@ -5,11 +5,13 @@ import { useState } from 'react'
 const SelectionSection = () => {
 
     const initial = [
-        new Date('2021,01,01'),
+        new Date(),
         new Date()
     ]
 
     const [value, setValue] = useState(initial)
+
+    console.log(value)
 
   return (
     <>
