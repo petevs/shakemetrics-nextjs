@@ -1,4 +1,5 @@
 import { IoAnalytics, IoWalletSharp } from 'react-icons/io5'
+import { BiTransfer, BiArrowToBottom } from 'react-icons/bi'
 
 
 export const navItems = [
@@ -15,12 +16,12 @@ export const navItems = [
     { 
         title: 'Transfers', 
         path: '/dashboard/wallets',
-        icon: <IoWalletSharp />
+        icon: <BiTransfer />
     },
     { 
         title: 'Purchases', 
         path: '/dashboard/wallets',
-        icon: <IoWalletSharp />
+        icon: <BiArrowToBottom />
     },
     { 
         title: 'Sales', 
