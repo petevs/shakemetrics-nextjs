@@ -1,10 +1,19 @@
+import { MantineProvider } from '@mantine/core'
 import { GlobalProvider } from '../state/GlobalContext'
-import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (  
     <GlobalProvider>
-      <Component {...pageProps} />
+      <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: 'light',
+          }}
+      >
+        <Component {...pageProps} />
+      </MantineProvider>
     </GlobalProvider>
   )
 }

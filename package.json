@@ -9,6 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/core": "^3.6.9",
+    "@mantine/dates": "^3.6.9",
+    "@mantine/dropzone": "^3.6.9",
+    "@mantine/hooks": "^3.6.9",
+    "@mantine/modals": "^3.6.9",
+    "@mantine/next": "^3.6.9",
+    "dayjs": "^1.10.7",
     "firebase": "^9.6.7",
     "next": "12.1.0",
     "react": "17.0.2",
