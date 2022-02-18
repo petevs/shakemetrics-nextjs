@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navbar, Text } from '@mantine/core'
 
-const Nav = ({opened}) => {
+const Nav = (props, {opened}) => {
 
   return (
     <Navbar
+        {...props}
         padding='md'
         hiddenBreakpoint="sm"
         hidden={!opened}
