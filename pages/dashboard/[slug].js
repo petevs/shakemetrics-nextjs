@@ -7,7 +7,7 @@ import { dashboardItems } from '../../data/navItems'
 export async function getStaticPaths(){
     
     const paths = dashboardItems.map(item => ({
-        params: { id: (item.title).toLowerCase()}
+        params: { slug: (item.title).toLowerCase()}
     }))
     
     
@@ -19,7 +19,7 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({ params }) {
 
-    const post = params.id
+    const post = params.slug
 
     return {
         props: {
@@ -39,7 +39,7 @@ const DashboardPage = (props) => {
         <DashboardShell>
             <Title
             >
-                {props.title}
+                {slug}
             </Title>
         </DashboardShell>
     )
