@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { GlobalContext } from '../state/GlobalContext';
 import DashboardHeader from './DashboardHeader'
 import { AppShell, Burger, Header, MediaQuery, Navbar, useMantineTheme } from '@mantine/core';
 import Nav from './Nav';
 import DashboardPage from './DashboardPage';
+import { toggleNav } from '../state/appReducer';
 
 const DashboardShell = ({ slug, children }) => {
-  const [opened, setOpened] = useState(false);
+  const { state, dispatch } = useContext(GlobalContext)
   const theme = useMantineTheme();
 
   return (
@@ -16,7 +18,7 @@ const DashboardShell = ({ slug, children }) => {
         <Navbar
           padding="md"
           hiddenBreakpoint="sm"
-          hidden={!opened}
+          hidden={!state.navOpened}
           width={{ sm: 250 }}
         >
           <Nav />
@@ -27,8 +29,8 @@ const DashboardShell = ({ slug, children }) => {
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
+                opened={state.navOpened}
+                onClick={() => dispatch(toggleNav())}
                 size="sm"
                 color={theme.colors.gray[6]}
                 mr="xl"

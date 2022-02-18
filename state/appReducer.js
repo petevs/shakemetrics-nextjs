@@ -19,7 +19,14 @@ export const fetchingMarketDataError = (data) => {
     return { type: FETCHING_MARKET_DATA_ERROR, payload: data}
 }
 
+const TOGGLE_NAV = "TOGGLE_NAV"
+
+export const toggleNav = ( data ) => {
+    return { type: TOGGLE_NAV, payload: data}
+}
+
 export const initialAppState = {
+    navOpened: false,
     marketData: {
         timestamp: null,
         price: {
@@ -54,6 +61,11 @@ export const appReducer = ( state, action) => {
                 ...state,
                 fetching: false,
                 error: action.payload
+            }
+        case TOGGLE_NAV:
+            return {
+                ...state,
+                navOpened: action.payload || !state.navOpened,
             }
         default:
             return state

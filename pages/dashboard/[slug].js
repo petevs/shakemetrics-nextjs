@@ -38,7 +38,9 @@ const DbPage = (props) => {
     return(
         <DashboardShell
             slug={slug}
-        />
+        >
+            <h1>{slug}</h1>
+        </DashboardShell>
     )
 }
 

@@ -1,8 +1,13 @@
+import { useContext } from 'react';
+import { GlobalContext } from '../state/GlobalContext';
 import { UnstyledButton, Group, Avatar, Text, ThemeIcon, useMantineColorScheme, THEME_ICON_SIZES } from '@mantine/core';
 import { IoAnalytics } from 'react-icons/io5'
 import { useRouter } from 'next/router';
+import { toggleNav } from '../state/appReducer';
 
 const NavItem= (props) => {
+
+    const { dispatch } = useContext(GlobalContext)
 
     const router = useRouter()
     const active = router.asPath === props.path
@@ -20,10 +25,16 @@ const NavItem= (props) => {
         }
     })
 
+
+    const handleClick = () => {
+        dispatch(toggleNav(false))
+        router.push(props.path)
+    }
+
   return (
     <UnstyledButton 
         sx={style} 
-        onClick={() => router.push(props.path)}
+        onClick={() => handleClick()}
     >
         <Group>
         <ThemeIcon size='sm' variant='light'>

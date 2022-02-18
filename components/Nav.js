@@ -5,7 +5,7 @@ import { generalItems, dashboardItems } from '../data/navItems'
 import NavGroup from './NavGroup'
 import { FaUserFriends } from 'react-icons/fa'
 
-const Nav = (props, {opened}) => {
+const Nav = (props) => {
 
   return (
     <>
@@ -16,6 +16,7 @@ const Nav = (props, {opened}) => {
         <NavGroup
           title='General'
           items={generalItems}
+          setOpened={props.setOpened}
         />
         <NavGroup
           title='Dashboard'
