@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       <DashboardShell>
-        Current bitcoin price: {usePrices().marketData.price.BTC}
+        I am the dashboard
       </DashboardShell>
 
     </div>

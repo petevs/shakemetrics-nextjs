@@ -3,6 +3,7 @@ import { Navbar, Text, ScrollArea, Button } from '@mantine/core'
 import MenuItem from './NavItem'
 import { generalItems, dashboardItems } from '../data/navItems'
 import NavGroup from './NavGroup'
+import { FaUserFriends } from 'react-icons/fa'
 
 const Nav = (props, {opened}) => {
 

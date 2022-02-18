@@ -5,7 +5,7 @@ const usePrices = () => {
 
     const { state } = useContext(GlobalContext)
 
-    return state
+    return state.marketData.price
 
 }
 
