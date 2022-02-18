@@ -1,4 +1,4 @@
-import { Group, ThemeIcon, Text } from "@mantine/core"
+import { Group, ThemeIcon, Text, Box } from "@mantine/core"
 import usePrices from "../hooks/usePrices"
 import { BiBitcoin } from 'react-icons/bi'
 import { SiEthereum } from 'react-icons/si'
@@ -9,9 +9,9 @@ const PriceTicker = (props) => {
     const { BTC, ETH } = usePrices()
 
   return (
-    <>
+    <Box>
         {
-            (BTC && ETH) &&
+            (BTC > 0 && ETH > 0) &&
             <Group ml='md' sx={props.sx}>
                 <Group spacing='xs'>
                     <ThemeIcon radius='xl' color='orange' size='sm'>
@@ -37,7 +37,7 @@ const PriceTicker = (props) => {
                 </Group>
             </Group>
         }
-    </>
+    </Box>
   )
 }
 

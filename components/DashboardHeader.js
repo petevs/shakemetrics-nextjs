@@ -14,7 +14,7 @@ const DashboardHeader = () => {
         justifyItems: 'start',
         [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
             justifyItems: 'center',
-            gridTemplateColumns: '1fr auto'
+            gridTemplateColumns: '1fr auto auto'
         }
     })
 

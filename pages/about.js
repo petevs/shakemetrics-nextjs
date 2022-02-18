@@ -1,9 +1,10 @@
+import { Title } from "@mantine/core"
 import DashboardShell from "../components/DashboardShell"
 
 const AboutPage = () => {
   return (
     <DashboardShell>
-        <h1>I am the About Page</h1>
+        <Title>About</Title>
     </DashboardShell>
   )
 }

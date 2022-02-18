@@ -1,13 +1,16 @@
-import { Title } from '@mantine/core'
+import { DateRangePicker } from '@mantine/dates'
 import { useRouter } from 'next/router'
 import DashboardShell from '../../components/DashboardShell'
+import PageHeader from '../../components/PageHeader'
+import ScorecardSection from '../../components/ScorecardSection'
+import SelectionSection from '../../components/SelectionSection'
 import { dashboardItems } from '../../data/navItems'
 
 
 export async function getStaticPaths(){
     
     const paths = dashboardItems.map(item => ({
-        params: { slug: (item.slug).toLowerCase()}
+        params: { slug: (item.slug)}
     }))
     
     
@@ -19,11 +22,13 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({ params }) {
 
-    const post = params.slug
+    const details = dashboardItems.filter(item => item.slug === params.slug)
+
+    const post = details[0]
 
     return {
         props: {
-            title: post
+            title: post.title
         }
     }
 
@@ -39,7 +44,8 @@ const DbPage = (props) => {
         <DashboardShell
             slug={slug}
         >
-            <h1>{slug}</h1>
+            <PageHeader title={props.title} />
+            <ScorecardSection />
         </DashboardShell>
     )
 }

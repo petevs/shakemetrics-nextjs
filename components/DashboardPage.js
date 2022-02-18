@@ -1,10 +1,11 @@
+import { Container, Paper, Text } from '@mantine/core'
 import React from 'react'
 
 const DashboardPage = ({ slug, children }) => {
   return (
-    <div>
+    <Container mt='md' size='xl'>
       {children}
-    </div>
+    </Container>
 
   )
 }
