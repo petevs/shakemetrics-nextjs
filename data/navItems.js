@@ -23,41 +23,49 @@ export const dashboardItems = [
     { 
         title: 'Performance', 
         path: '/dashboard/performance',
+        slug: 'performance',
         icon: <IoAnalytics />
     },
     { 
         title: 'Wallets', 
         path: '/dashboard/wallets',
+        slug: 'wallets',
         icon: <IoWalletSharp />
     },
     { 
         title: 'Transfers', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/transfers',
+        slug: 'transfers',
         icon: <BiTransfer />
     },
     { 
         title: 'Purchases', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/purchases',
+        slug: 'purchases',
         icon: <MdOutlineCallReceived />
     },
     { 
         title: 'Sales', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/sales',
+        slug: 'sales',
         icon: <MdCallMade />
     },
     { 
         title: '#ShakingSats', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/shakingsats',
+        slug: 'shakingsats',
         icon: <AiOutlineShake />
     },
     { 
         title: '#CashbackCard', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/cashbackcard',
+        slug: 'cashbackcard',
         icon: <IoCardOutline />
     },
     { 
         title: 'Peer Transfers', 
-        path: '/dashboard/wallets',
+        path: '/dashboard/peertransfers',
+        slug: 'peertransfers',
         icon: <FaUserFriends />
     },
 

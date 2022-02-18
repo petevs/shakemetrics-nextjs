@@ -7,7 +7,7 @@ import { dashboardItems } from '../../data/navItems'
 export async function getStaticPaths(){
     
     const paths = dashboardItems.map(item => ({
-        params: { slug: (item.title).toLowerCase()}
+        params: { slug: (item.slug).toLowerCase()}
     }))
     
     
@@ -30,19 +30,16 @@ export async function getStaticProps({ params }) {
 }
 
 
-const DashboardPage = (props) => {
+const DbPage = (props) => {
 
     const router = useRouter()
     const { slug } = router.query
     
     return(
-        <DashboardShell>
-            <Title
-            >
-                {slug}
-            </Title>
-        </DashboardShell>
+        <DashboardShell
+            slug={slug}
+        />
     )
 }
 
-export default DashboardPage
+export default DbPage
