@@ -8,12 +8,12 @@ import { FaUserFriends } from 'react-icons/fa'
 export const generalItems = [
     { 
         title: 'About', 
-        path: '/dashboard/performance',
+        path: '/about',
         icon: <AiOutlineInfoCircle />
     },
     { 
         title: 'FAQ', 
-        path: '/dashboard/performance',
+        path: '/faq',
         icon: <AiOutlineQuestionCircle />
     }
 ]

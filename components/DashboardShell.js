@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DashboardHeader from './DashboardHeader'
-import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core';
+import { AppShell, Burger, Header, MediaQuery, Navbar, useMantineTheme } from '@mantine/core';
 import Nav from './Nav';
 import DashboardPage from './DashboardPage';
 

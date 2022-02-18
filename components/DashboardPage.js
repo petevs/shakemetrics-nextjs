@@ -1,8 +1,12 @@
 import React from 'react'
 
-const DashboardPage = ({ slug }) => {
+const DashboardPage = ({ slug, children }) => {
   return (
-    <div>{slug}</div>
+    <div>
+      <div>{slug}</div>
+      {children}
+    </div>
+
   )
 }
 
