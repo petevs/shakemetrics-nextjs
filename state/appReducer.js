@@ -1,32 +1,19 @@
+import { dateRanges } from "../helpers/dateRanges"
+
+
 const FETCHING_MARKET_DATA_SUCCESS = "FETCHING_MARKET_DATA_SUCCESS"
 const FETCHING_HISTORICAL_DATA_SUCCESS = "FETCHING FETCHING_HISTORICAL_DATA_SUCCESS"
 const FETCHING_MARKET_DATA_LOADING = "FETCHING_MARKET_DATA_LOADING"
 const FETCHING_MARKET_DATA_ERROR = "FETCHING_MARKET_DATA_ERROR"
 
-export const fetchingMarketDataLoading = (data) => {
-    return { type: FETCHING_MARKET_DATA_LOADING, payload: data}
-}
-
-export const fetchingMarketDataSuccess = (data) => {
-    return { type: FETCHING_MARKET_DATA_SUCCESS, payload: data}
-}
-
-export const fetchingHistoricalDataSuccess = (data) => {
-    return { type: FETCHING_HISTORICAL_DATA_SUCCESS, payload: data}
-}
-
-export const fetchingMarketDataError = (data) => {
-    return { type: FETCHING_MARKET_DATA_ERROR, payload: data}
-}
-
 const TOGGLE_NAV = "TOGGLE_NAV"
 
-export const toggleNav = ( data ) => {
-    return { type: TOGGLE_NAV, payload: data}
-}
+const CHANGE_DATE_RANGE = "CHANGE_DATE_RANGE"
 
 export const initialAppState = {
     navOpened: false,
+    dateRange: dateRanges["Last 7 Days"],
+    dateRangeName: 'Last 7 Days',
     marketData: {
         timestamp: null,
         price: {
@@ -67,7 +54,45 @@ export const appReducer = ( state, action) => {
                 ...state,
                 navOpened: action.payload || !state.navOpened,
             }
+        case CHANGE_DATE_RANGE:
+            return {
+                ...state,
+                dateRange: action.payload.value,
+                dateRangeName: action.payload.name
+            }
         default:
             return state
     }
+}
+
+//ACTIONS
+
+
+//Market Data Actions
+export const fetchingMarketDataLoading = (data) => {
+    return { type: FETCHING_MARKET_DATA_LOADING, payload: data}
+}
+
+export const fetchingMarketDataSuccess = (data) => {
+    return { type: FETCHING_MARKET_DATA_SUCCESS, payload: data}
+}
+
+export const fetchingHistoricalDataSuccess = (data) => {
+    return { type: FETCHING_HISTORICAL_DATA_SUCCESS, payload: data}
+}
+
+export const fetchingMarketDataError = (data) => {
+    return { type: FETCHING_MARKET_DATA_ERROR, payload: data}
+}
+
+
+//Nav Visibility Toggle
+export const toggleNav = ( data ) => {
+    return { type: TOGGLE_NAV, payload: data}
+}
+
+
+//Date Range
+export const changeDateRange = ( data ) => {
+    return { type: CHANGE_DATE_RANGE, payload: data}
 }
