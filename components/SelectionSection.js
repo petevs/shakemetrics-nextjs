@@ -1,4 +1,4 @@
-import { Box, Popper, Paper, Center, useMantineTheme, Button, Menu, Select, Popover, Image, Text, Group, TextInput } from '@mantine/core'
+import { Box, Popper, Paper, Center, useMantineTheme, Button, Menu, Select, Popover, Image, Text, Group, Input } from '@mantine/core'
 import { DateRangePicker, RangeCalendar } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks';
 import { useState, useEffect } from 'react'
@@ -28,6 +28,8 @@ const SelectionSection = () => {
     }
 
     console.log(dayjs().month())
+
+    
 
     const ranges = {
       'Yesterday': [dayjs().subtract(1, 'day').toDate(), dayjs().toDate()],
@@ -82,12 +84,13 @@ const SelectionSection = () => {
     <Box sx={wrapper}>
       <Menu
         control={
-          <TextInput 
+          <Input 
             size='sm' 
             radius='md' 
             color='gray'
             sx={inputStyle}
             value={dateRange}
+            type='button'
           />
         }
       >
@@ -107,6 +110,7 @@ const SelectionSection = () => {
               value={calVal}
               radius='md'
               clearable={false}
+              preventFocus
               amountOfMonths={isMobile ? 1 : 2}
               dropdownType={isMobile ? 'modal' : 'popover'}
               maxDate={new Date()}

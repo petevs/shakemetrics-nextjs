@@ -1,4 +1,5 @@
 import { DateRangePicker } from '@mantine/dates'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import DashboardShell from '../../components/DashboardShell'
 import PageHeader from '../../components/PageHeader'
@@ -41,12 +42,18 @@ const DbPage = (props) => {
     const { slug } = router.query
     
     return(
-        <DashboardShell
-            slug={slug}
-        >
-            <PageHeader title={props.title} />
-            <ScorecardSection />
-        </DashboardShell>
+        <>
+            <Head>
+                <title>{props.title}</title>
+                <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
+            </Head>
+            <DashboardShell
+                slug={slug}
+            >
+                <PageHeader title={props.title} />
+                <ScorecardSection />
+            </DashboardShell>
+        </>
     )
 }
 
