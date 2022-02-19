@@ -1,12 +1,12 @@
-import { Box, Text, Title } from '@mantine/core'
+import { Box, Text, ThemeIcon, Title, Group } from '@mantine/core'
 import React from 'react'
 import SelectionSection from './SelectionSection'
 
-const PageHeader = ({title}) => {
+const PageHeader = ({title, icon}) => {
 
     const style = (theme) => ({
         display: 'grid',
-        gridTemplateColumns: '1fr 325px',
+        gridTemplateColumns: '1fr auto',
         alignItems: 'end',
         textTranform: 'capitalize',
         paddingBottom: `${theme.spacing.xl}px`,
@@ -21,9 +21,9 @@ const PageHeader = ({title}) => {
 
   return (
     <Box sx={style}>
-      <Title color='dimmed' size='xl' weight={700}>
-          {title}
-      </Title>
+        <Title color='dimmed' size='xl' weight={700}>
+            {title}
+        </Title>
       <SelectionSection />
     </Box>
   )

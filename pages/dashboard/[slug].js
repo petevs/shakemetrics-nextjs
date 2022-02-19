@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            title: post.title
+            title: post.title,
         }
     }
 
