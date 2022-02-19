@@ -17,10 +17,12 @@ const useDateRange = () => {
     }
 
     const handleDateChange = ( range ) => {
-        dispatch(changeDateRange({
-            values: range,
-            name: 'Custom'
-        }))
+        if(range[0] && range[1]){
+            dispatch(changeDateRange({
+                value: range,
+                name: 'Custom'
+            }))
+        }
     }
 
 

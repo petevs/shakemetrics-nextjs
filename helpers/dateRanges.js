@@ -74,3 +74,8 @@ const getDateList = () => {
 }
 
 export const dateRangeList = getDateList()
+
+
+export const convertDateToFriendly = ( date ) => {
+    return dayjs(date).format('YYYY-MM-DD')
+}

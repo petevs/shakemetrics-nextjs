@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader'
 import ScorecardSection from '../../components/ScorecardSection'
 import SelectionSection from '../../components/SelectionSection'
 import { dashboardItems } from '../../data/navItems'
+import useSummary from '../../hooks/useSummary'
 
 
 export async function getStaticPaths(){
@@ -40,6 +41,8 @@ const DbPage = (props) => {
 
     const router = useRouter()
     const { slug } = router.query
+
+    useSummary()
     
     return(
         <>
