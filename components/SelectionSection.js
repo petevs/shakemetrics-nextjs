@@ -3,6 +3,7 @@ import { DateRangePicker } from '@mantine/dates'
 import { useMediaQuery } from '@mantine/hooks';
 import { AiOutlineCalendar } from 'react-icons/ai'
 import useDateRange from '../hooks/useDateRange';
+import { IoChevronDown } from 'react-icons/io5'
 
 const SelectionSection = () => {
 

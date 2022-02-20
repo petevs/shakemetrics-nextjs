@@ -26,10 +26,29 @@ const useSummary = () => {
         return snapshotList.slice(firstEntry.index, lastEntry.index)
     }
 
+    const transactionList = () => {
+        const transactionsByDay = trimmedSnapshotList().map(item => item.transactions)
+
+        const allTransactions = []
+
+        transactionsByDay.forEach( day => {
+            day.forEach((transaction, idx) => allTransactions.push({
+                ...transaction,
+                id: idx
+            }))
+        })
+
+        return allTransactions
+
+    }
+
     const trimmedSnapshots = trimmedSnapshotList()
+    const transactions = transactionList()
 
     return {
-        trimmedSnapshots
+        trimmedSnapshots,
+        transactions,
+        lastEntry
     }
 
 }
