@@ -9,11 +9,12 @@ const SelectionSection = () => {
     const isMobile = useMediaQuery('(max-width: 755px)');
 
     const {
-      dateRange,
       dateRangeName,
       dateRangeList,
+      tempDateRange,
       handlePresetClick,
-      handleDateChange
+      handleDateChange,
+      setEditing,
     } = useDateRange()
 
     //STYLES
@@ -63,13 +64,14 @@ const SelectionSection = () => {
       </Menu>
       <DateRangePicker
               icon={<AiOutlineCalendar />}
-              value={dateRange}
+              value={tempDateRange}
               radius='md'
               clearable={false}
               amountOfMonths={isMobile ? 1 : 2}
               dropdownType={isMobile ? 'modal' : 'popover'}
               maxDate={new Date()}
               onChange={(val) => handleDateChange(val)}
+              onDropdownClose={() => setEditing(false)}
               sx={datePicker}
       />
     </Box>
