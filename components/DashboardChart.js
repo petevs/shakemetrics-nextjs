@@ -1,8 +1,9 @@
-import { Paper, Title, Text, Group, ThemeIcon, useMantineColorScheme, Box, Input} from '@mantine/core';
+import { Paper, Title, Text, Group, ThemeIcon, useMantineColorScheme, Box, Input } from '@mantine/core';
 import dynamic from 'next/dynamic';
 import { IoArrowUp, IoArrowDown } from 'react-icons/io5'
 import { toDollars } from '../helpers/currencyFormatters';
 import CurrencyToggle from './CurrencyToggle';
+import { useMediaQuery } from '@mantine/hooks';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -11,6 +12,8 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry, chang
 
     const { colorScheme } = useMantineColorScheme();
     const dark = colorScheme === 'dark';
+
+    const isMobile = useMediaQuery('(max-width: 755px)');
 
     const options = {
         theme: {
@@ -34,6 +37,7 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry, chang
             categories: categories,
         },
         yaxis: {
+            show: !isMobile,
             labels: {
                 formatter: value => Math.round(value * 10000000) / 10000000
             }
