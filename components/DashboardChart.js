@@ -50,7 +50,8 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry, chang
         borderBottom: `1px solid ${theme.colors.dark[0]}`,
         [`@media (max-width: ${theme.breakpoints.md}px)`]: {
             gridTemplateColumns: '1fr',
-        }
+        },
+        textAlign: isMobile ? 'center' : 'left'
     })
 
     const chartSelectStyle = (theme) => ({
@@ -75,18 +76,24 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry, chang
                     value='Unrealized Gain'
                 />
             </Box>
-            <Text uppercase>Unrealized Gain</Text>
-            <Title size='lg'>${toDollars(val)}</Title>
-            <Group sx={{gap: '5px'}} mb='md'>
-                <ThemeIcon radius='xl' variant='light' color={change.change > 0 ? 'green' : 'red'}>
-                    { change.change > 0 ? <IoArrowUp /> : <IoArrowDown /> }
-                </ThemeIcon>
-                <Text weight={700} color={change.change > 0 ? 'green' : 'red'}>
-                    {toDollars(change.change)} {change.percent}
-                    </Text>
+            <Text uppercase sx={{textAlign: isMobile ? 'center' : 'left'}}>Unrealized Gain</Text>
+            <Title sx={{textAlign: isMobile ? 'center' : 'left'}} size='lg'>${toDollars(val)}</Title>
+            <Group direction={isMobile ? 'column' : 'row'} position={isMobile ? 'center' : 'left'} sx={{gap: '5px', paddingBottom: '2rem'}}>
+                <Group sx={{gap: '5px'}}>
+                    <ThemeIcon radius='xl' variant='light' color={change.change > 0 ? 'green' : 'red'}>
+                        { change.change > 0 ? <IoArrowUp /> : <IoArrowDown /> }
+                    </ThemeIcon>
+                    <Text 
+                        weight={700} 
+                        color={change.change > 0 ? 'green' : 'red'}
+                    >
+                        {toDollars(change.change)} {change.percent}
+                        </Text>
+                </Group>
                 <Text color='dimmed' size='sm'>in selected period</Text>
             </Group>
             <Chart
+                style={{margin: isMobile ? '-2.25rem': 'inherit'}}
                 series={series}
                 options={options}
                 type='area'
