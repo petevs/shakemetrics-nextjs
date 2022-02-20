@@ -46,7 +46,7 @@ const DbPage = (props) => {
     const router = useRouter()
     const { slug } = router.query
 
-    const { trimmedSnapshots, transactions, lastEntry } = useSummary()
+    const { trimmedSnapshots, transactions, lastEntry, compare } = useSummary()
 
     const btcTrans = transactions.filter(transaction => transaction['Debit Currency'] === 'BTC' || transaction['Credit Currency'] === 'BTC')
 
@@ -55,12 +55,13 @@ const DbPage = (props) => {
 
     const series = [
         {
-            name: 'test',
-            data: trimmedSnapshots.map(item => item.wallets.BTC)
+            name: 'Unrealized Gain',
+            data: trimmedSnapshots.map(item => item.performance.BTC.unrealizedGain)
         }
     ]
 
 
+    const change = compare('performance', 'BTC')
 
 
     
@@ -74,12 +75,13 @@ const DbPage = (props) => {
                 slug={slug}
             >
                 <PageHeader title={props.title} />
-                <CurrencyToggle />
                 {/* <ScorecardSection /> */}
                 <DashboardChart 
                     categories={categories}
                     series={series}
                     lastEntry={lastEntry}
+                    val={lastEntry.performance.BTC.unrealizedGain}
+                    change={change['unrealizedGain']}
                 />
                 <Transactions 
                     transactions={btcTrans}

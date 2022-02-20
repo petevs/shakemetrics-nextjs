@@ -8,7 +8,7 @@ export const compareSnapshots = ( startEntry, endEntry, parentKey, childKey, ) =
             const last = endEntry[parentKey][childKey][key]
             const start = startEntry[parentKey][childKey][key]
             const diff = last - start
-            const percent = `(${(diff / last * 100).toFixed(2)}%)`
+            const percent = `(${(diff / last * 100).toFixed(2)})%`
 
             change[key] = {
                 change: diff,
@@ -23,7 +23,7 @@ export const compareSnapshots = ( startEntry, endEntry, parentKey, childKey, ) =
         const last = endEntry[parentKey][key]
         const start = startEntry[parentKey][key]
         const diff = last - start
-        const percent = `(${(diff / last * 100).toFixed(2)}%)`
+        const percent = `(${(diff / last * 100).toFixed(2)})%`
 
         change[key] = {
             change: diff,

@@ -20,7 +20,10 @@ const useSummary = () => {
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
     const lastEntry = snapshotObj[endDate] || snapshotList[lastIndex]
 
-    const comparison = compareSnapshots(firstEntry, lastEntry, 'historicalPrice')
+    const compare = ( parent, child ) => {
+        return compareSnapshots(firstEntry, lastEntry, parent, child)
+    }
+
 
     const trimmedSnapshotList = () => {
         return snapshotList.slice(firstEntry.index, lastEntry.index)
@@ -48,7 +51,8 @@ const useSummary = () => {
     return {
         trimmedSnapshots,
         transactions,
-        lastEntry
+        lastEntry,
+        compare
     }
 
 }

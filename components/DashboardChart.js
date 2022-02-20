@@ -1,10 +1,12 @@
-import { Paper, Title, Text, Group, ThemeIcon, useMantineColorScheme} from '@mantine/core';
+import { Paper, Title, Text, Group, ThemeIcon, useMantineColorScheme, Box, Input} from '@mantine/core';
 import dynamic from 'next/dynamic';
-import { IoArrowUp } from 'react-icons/io5'
+import { IoArrowUp, IoArrowDown } from 'react-icons/io5'
+import { toDollars } from '../helpers/currencyFormatters';
+import CurrencyToggle from './CurrencyToggle';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const DashboardChart = ({ categories, series, title, yAxisType, lastEntry}) => {
+const DashboardChart = ({ categories, series, title, yAxisType, lastEntry, change, val}) => {
 
 
     const { colorScheme } = useMantineColorScheme();
@@ -32,11 +34,28 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry}) => {
             categories: categories,
         },
         yaxis: {
-            // labels: {
-            //     formatter: value => formatYAxis(value)
-            // }
+            labels: {
+                formatter: value => Math.round(value * 10000000) / 10000000
+            }
         }
     }
+
+    const headerStyle = (theme) => ({
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        borderBottom: `1px solid ${theme.colors.dark[0]}`,
+        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+            gridTemplateColumns: '1fr',
+        }
+    })
+
+    const chartSelectStyle = (theme) => ({
+        justifySelf: 'end',
+        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+            justifySelf: 'stretch',
+            marginBottom: `${theme.spacing.md}px`
+        }
+    })
 
     return (
         <Paper
@@ -45,13 +64,22 @@ const DashboardChart = ({ categories, series, title, yAxisType, lastEntry}) => {
             withBorder
             padding='xl'
         >
-            <Text uppercase>Ending BTC Balance</Text>
-            <Title size='lg'>{lastEntry.wallets.BTC}</Title>
+            <Box sx={headerStyle} mb='xl'>
+                <CurrencyToggle />
+                <Input
+                    sx={chartSelectStyle} 
+                    value='Unrealized Gain'
+                />
+            </Box>
+            <Text uppercase>Unrealized Gain</Text>
+            <Title size='lg'>${toDollars(val)}</Title>
             <Group sx={{gap: '5px'}} mb='md'>
-                <ThemeIcon radius='xl' variant='light' color='green'>
-                    <IoArrowUp />
+                <ThemeIcon radius='xl' variant='light' color={change.change > 0 ? 'green' : 'red'}>
+                    { change.change > 0 ? <IoArrowUp /> : <IoArrowDown /> }
                 </ThemeIcon>
-                <Text weight={700} color='green'>14.3%</Text>
+                <Text weight={700} color={change.change > 0 ? 'green' : 'red'}>
+                    {toDollars(change.change)} {change.percent}
+                    </Text>
                 <Text color='dimmed' size='sm'>in selected period</Text>
             </Group>
             <Chart

@@ -4,8 +4,18 @@ import { FaCanadianMapleLeaf } from 'react-icons/fa'
 
 
 const CurrencyToggle = () => {
+
+    const style = (theme) => ({
+        justifySelf: 'start',
+        [`@media (max-width:${theme.breakpoints.md}px)`]: {
+            justifySelf: 'center'
+        }
+    })
+
+
     return (
         <SegmentedControl
+            sx={style}
             mb='md'
             data={[
                 {
