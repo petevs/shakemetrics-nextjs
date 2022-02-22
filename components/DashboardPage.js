@@ -1,5 +1,4 @@
-import { Container, Paper, Text } from '@mantine/core'
-import React from 'react'
+import { Container } from '@mantine/core'
 
 const DashboardPage = ({ children }) => {
   return (

@@ -21,7 +21,7 @@ const PriceTicker = (props) => {
                         weight={500}
                         size='md'
                     >
-                        {`$${toDollars(BTC)}`}
+                        {`$${toDollars(BTC).text}`}
                     </Text>
                 </Group>
                 <Group spacing='xs'>
@@ -32,7 +32,7 @@ const PriceTicker = (props) => {
                         weight={500}
                         size='md'
                     >
-                        {`$${toDollars(ETH)}`}
+                        {`$${toDollars(ETH).text}`}
                     </Text>
                 </Group>
             </Group>

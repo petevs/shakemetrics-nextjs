@@ -11,47 +11,50 @@ const DbToggle = ({ parentKey, setParentKey, data}) => {
         }
     })
 
+    const changeLabel = (label) => {
+
+        if(label === 'BTC'){return (
+            <Center>
+                <SiBitcoin />
+                <Box ml={5}>BTC</Box>
+            </Center>
+        )}
+
+        if(label === 'ETH'){ return (
+            <Center>
+                <SiEthereum />
+                <Box ml={5}>ETH</Box>
+            </Center>
+        )}
+
+        if(label === 'CAD'){ return (
+            <Center>
+                <FaCanadianMapleLeaf />
+                <Box ml={5}>CAD</Box>
+            </Center>
+        )
+        }
+
+        return label
+
+    }
+
+    const newData = data.map(item => {
+        return {
+            value: item.value,
+            label: changeLabel(item.label)
+        }
+    })
+
   return (
     <SegmentedControl
         sx={style}
         mb='md'
         value={parentKey}
         onChange={setParentKey}
-        data={data}
+        data={newData}
 />
   )
 }
 
 export default DbToggle
-
-/*
-[
-        {
-            value: 'BTC',
-            label: (
-                <Center>
-                    <SiBitcoin />
-                    <Box ml={5}>BTC</Box>
-                </Center>
-            ),
-        },
-        {
-            value: 'ETH',
-            label: (
-                <Center>
-                    <SiEthereum />
-                    <Box ml={5}>ETH</Box>
-                </Center>
-            ),
-        },
-        {
-            value: 'CAD',
-            label: (
-                <Center>
-                    <FaCanadianMapleLeaf />
-                    <Box ml={5}>CAD</Box>
-                </Center>
-            ),
-        },
-    ]
-*/
