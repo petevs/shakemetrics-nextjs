@@ -1,25 +1,26 @@
-import { DateRangePicker } from '@mantine/dates'
-import { Paper, Text, Box, Input, useMantineColorScheme } from '@mantine/core'
+//NEXT
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { IoReturnDownBackSharp } from 'react-icons/io5'
+
+//MANTINE
+import { Paper, Text, useMantineColorScheme } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+
+//Library
+import { dbPageContent } from '../../lib/dbPageContent'
+
+//Hooks
+import useDbPage from '../../hooks/useDbPage'
+
+//COMPONENTS
 import DashboardShell from '../../components/DashboardShell'
-import DbChart from '../../components/DbChart'
 import PageHeader from '../../components/PageHeader'
-import ScorecardSection from '../../components/ScorecardSection'
-import CurrencyToggle from '../../components/CurrencyToggle'
-import Transactions from '../../components/Transactions'
-import { dashboardItems } from '../../data/navItems'
-import useSummary from '../../hooks/useSummary'
-import { useState, useEffect } from 'react'
-import { useMediaQuery } from '@mantine/hooks';
-import DbScorecard from '../../components/DbScorecard'
 import DbSelectionSection from '../../components/DbSelectionSection'
+import NoActivity from '../../components/NoActivity'
 import DbToggle from '../../components/DbToggle'
 import DbSelect from '../../components/DbSelect'
-import { dbPageContent } from '../../lib/dbPageContent'
-import { toBitcoin } from '../../helpers/currencyFormatters'
-import useDbPage from '../../hooks/useDbPage'
+import DbScorecard from '../../components/DbScorecard'
+import DbChart from '../../components/DbChart'
 
 export async function getStaticPaths(){
     
@@ -55,20 +56,6 @@ const DbPage = (props) => {
     const router = useRouter()
     const { slug } = router.query
     const { details } = props
-
-    console.log(details)
-
-
-    // const { 
-    //     trimmedSnapshots, 
-    //     transactions, 
-    //     lastEntry,
-    //     series,
-    //     categories,
-    //     change,
-    //     currentVal,
-    //     endDate 
-    // } = useSummary(familyKey, parentKey, childKey)
 
     const {
         familyKey, setFamilyKey,
@@ -111,17 +98,9 @@ const DbPage = (props) => {
                         }
                     </DbSelectionSection>
                     {
-                        noActivity ?
-                        <Paper  sx={(theme) => ({
-                            display: 'grid',
-                            alignContent: 'center',
-                            justifyContent: 'center',
-                            minHeight: '400px', 
-                            backgroundColor: theme.colors.gray[0]})}>
-                            <Text size='md' color='dimmed'>No activity for this period</Text>
-                        </Paper>
-                        :
-                        <>
+                        noActivity 
+                        ? <NoActivity />
+                        : <>
                             <DbScorecard
                                 endDate={endDate}
                                 title={getTitle()}

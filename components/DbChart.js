@@ -1,13 +1,10 @@
-import { Paper, Title, Text, Group, ThemeIcon, useMantineColorScheme, Box, Input } from '@mantine/core';
+import { useMantineColorScheme } from '@mantine/core';
 import dynamic from 'next/dynamic';
-import { IoArrowUp, IoArrowDown } from 'react-icons/io5'
-import { toDollars } from '../helpers/currencyFormatters';
-import CurrencyToggle from './CurrencyToggle';
 import { useMediaQuery } from '@mantine/hooks';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const DbChart = ({ categories, series, title, yAxisType, lastEntry, change, val}) => {
+const DbChart = ({ categories, series }) => {
 
 
 
@@ -15,14 +12,6 @@ const DbChart = ({ categories, series, title, yAxisType, lastEntry, change, val}
     const dark = colorScheme === 'dark';
 
     const isMobile = useMediaQuery('(max-width: 755px)');
-
-    if(series[0].data.every(item => item === 0)){
-        return (
-            <>No Activity</>
-        )
-    }
-
-    console.log(series[0].data)
 
     const options = {
         theme: {
@@ -52,24 +41,6 @@ const DbChart = ({ categories, series, title, yAxisType, lastEntry, change, val}
             }
         }
     }
-
-    const headerStyle = (theme) => ({
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        borderBottom: `1px solid ${theme.colors.dark[0]}`,
-        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
-            gridTemplateColumns: '1fr',
-        },
-        textAlign: isMobile ? 'center' : 'left'
-    })
-
-    const chartSelectStyle = (theme) => ({
-        justifySelf: 'end',
-        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
-            justifySelf: 'stretch',
-            marginBottom: `${theme.spacing.md}px`
-        }
-    })
 
     return (
         <>

@@ -1,6 +1,5 @@
 import { Text, Title, Group, ThemeIcon } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
-import { toDollars } from '../helpers/currencyFormatters'
 
 const DbScorecard = ({ title, val, change, isMobile }) => {
 
