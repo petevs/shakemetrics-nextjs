@@ -4,10 +4,12 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { httpsCallable } from 'firebase/functions'
 import { GlobalContext } from '../state/GlobalContext'
 import { setResults, toggleDemo } from '../state/appReducer'
+import { useRouter } from 'next/router'
 
 
 const useFileUpload = () => {
 
+    const router = useRouter()
 
     const [file, setFile] = useState('')
     const [pending, setPending] = useState(false)
@@ -37,6 +39,7 @@ const useFileUpload = () => {
         dispatch(setResults(result))
         setPending(false)
         dispatch(toggleDemo(false))
+        router.push('/import/success')
 
     }
 

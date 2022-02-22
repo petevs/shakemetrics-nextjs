@@ -119,7 +119,7 @@ const useDbPage = ( details, slug ) => {
     
     //GET CHART DATA
 
-    const trimmedSnapshots = snapshotList.slice(firstEntry.index, lastEntry.index)
+    const trimmedSnapshots = snapshotList.slice(firstEntry.index - 1, lastEntry.index + 1)
 
     const getSeries = () => {
 
