@@ -22,6 +22,7 @@ import DbToggle from '../../components/DbToggle'
 import DbSelect from '../../components/DbSelect'
 import DbScorecard from '../../components/DbScorecard'
 import DbChart from '../../components/DbChart'
+import DemoNotification from '../../components/DemoNotification'
 
 export async function getStaticPaths(){
     
@@ -117,6 +118,7 @@ const DbPage = (props) => {
                     }
                 </Paper>
             </DashboardShell>
+            <DemoNotification />
         </>
     )
 }
