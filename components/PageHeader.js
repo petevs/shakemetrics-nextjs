@@ -1,6 +1,6 @@
 import { Box, Text, ThemeIcon, Title, Group } from '@mantine/core'
 import React from 'react'
-import SelectionSection from './SelectionSection'
+import DateRangeSelection from './DateRangeSelection'
 
 const PageHeader = ({title, icon}) => {
 
@@ -24,7 +24,7 @@ const PageHeader = ({title, icon}) => {
         <Title color='dimmed' size='xl' weight={700}>
             {title}
         </Title>
-      <SelectionSection />
+        <DateRangeSelection />
     </Box>
   )
 }

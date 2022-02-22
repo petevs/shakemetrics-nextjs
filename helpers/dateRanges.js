@@ -33,7 +33,7 @@ const thisMonth = () => {
 const lastYear = () => {
     const pastYear = dayjs().year() - 1
     const start = dayjs(`01-01-${pastYear}`).toDate()
-    const end = dayjs(`12-31-${dayjs().year()}`).toDate()
+    const end = dayjs(`12-31-${pastYear}`).toDate()
     return [start, end]
 }
 

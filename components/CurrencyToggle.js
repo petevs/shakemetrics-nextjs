@@ -3,7 +3,7 @@ import { SiBitcoin, SiEthereum } from 'react-icons/si'
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
 
 
-const CurrencyToggle = () => {
+const CurrencyToggle = ( { parentKey, setParentKey}) => {
 
     const style = (theme) => ({
         justifySelf: 'start',
@@ -12,11 +12,15 @@ const CurrencyToggle = () => {
         }
     })
 
+    console.log(parentKey)
+
 
     return (
         <SegmentedControl
             sx={style}
             mb='md'
+            value={parentKey}
+            onChange={setParentKey}
             data={[
                 {
                     value: 'BTC',

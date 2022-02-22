@@ -1,36 +1,60 @@
-export const compareSnapshots = ( startEntry, endEntry, parentKey, childKey, ) => {
-
-    const change = {}
+export const compareSnapshots = ( firstEntry, lastEntry, familyKey, parentKey, childKey, ) => {
 
     if(childKey){
-        for (const key in endEntry[parentKey][childKey]){
+        const first = firstEntry[familyKey][parentKey][childKey]
+        const last = lastEntry[familyKey][parentKey][childKey]
 
-            const last = endEntry[parentKey][childKey][key]
-            const start = startEntry[parentKey][childKey][key]
-            const diff = last - start
-            const percent = `(${(diff / last * 100).toFixed(2)})%`
+        const diff = last - first
+        const percent = `${(diff / last * 100).toFixed(2)}%`
 
-            change[key] = {
-                change: diff,
-                percent: percent,
-            }
-        }
-        return change
-    }
-
-    for (const key in endEntry[parentKey]){
-
-        const last = endEntry[parentKey][key]
-        const start = startEntry[parentKey][key]
-        const diff = last - start
-        const percent = `(${(diff / last * 100).toFixed(2)})%`
-
-        change[key] = {
+        return {
             change: diff,
-            percent: percent,
+            percent: percent
         }
     }
 
-    return change
+        const first = firstEntry[familyKey][parentKey]
+        const last = lastEntry[familyKey][parentKey]
 
-}
+        const diff = last - first
+        const percent = `${(diff / last * 100).toFixed(2)}%`
+
+        return {
+            change: diff,
+            percent: percent
+        }
+    }
+
+
+    // const change = {}
+
+    // if(childKey){
+    //     for (const key in lastEntry[familyKey][parentKey]){
+
+    //         const last = lastEntry[parentKey][childKey][key]
+    //         const start = firstEntry[parentKey][childKey][key]
+    //         const diff = last - start
+    //         const percent = `(${(diff / last * 100).toFixed(2)})%`
+
+    //         change[key] = {
+    //             change: diff,
+    //             percent: percent,
+    //         }
+    //     }
+    //     return change
+    // }
+
+    // for (const key in lastEntry[familyKey][parentKey]){
+
+    //     const last = lastEntry[parentKey][key]
+    //     const start = firstEntry[parentKey][key]
+    //     const diff = last - start
+    //     const percent = `(${(diff / last * 100).toFixed(2)})%`
+
+    //     change[key] = {
+    //         change: diff,
+    //         percent: percent,
+    //     }
+    // }
+
+    // return change

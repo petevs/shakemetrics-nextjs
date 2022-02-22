@@ -13,8 +13,6 @@ const Transactions = ({ transactions }) => {
         </tr>
       );
 
-    console.log(dayjs('2021-08-21T14:02:47+00'))
-
     return (
         <Paper
             shadow='sm'

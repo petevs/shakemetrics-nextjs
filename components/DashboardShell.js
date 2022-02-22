@@ -6,7 +6,7 @@ import Nav from './Nav';
 import DashboardPage from './DashboardPage';
 import { toggleNav } from '../state/appReducer';
 
-const DashboardShell = ({ slug, children }) => {
+const DashboardShell = ({ children }) => {
   const { state, dispatch } = useContext(GlobalContext)
   const theme = useMantineTheme();
 
@@ -42,7 +42,7 @@ const DashboardShell = ({ slug, children }) => {
         </Header>
       }
     >
-      <DashboardPage slug={slug} >
+      <DashboardPage>
         {children}
       </DashboardPage>
     </AppShell>

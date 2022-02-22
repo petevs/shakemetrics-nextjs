@@ -52,20 +52,20 @@ export const dashboardItems = [
     },
     { 
         title: '#ShakingSats', 
-        path: '/dashboard/shakingsats',
-        slug: 'shakingsats',
+        path: '/dashboard/shaking-sats',
+        slug: 'shaking-sats',
         icon: <AiOutlineShake />
     },
     { 
         title: '#CashbackCard', 
-        path: '/dashboard/cashbackcard',
-        slug: 'cashbackcard',
+        path: '/dashboard/cashback-card',
+        slug: 'cashback-card',
         icon: <IoCardOutline />
     },
     { 
         title: 'Peer Transfers', 
-        path: '/dashboard/peertransfers',
-        slug: 'peertransfers',
+        path: '/dashboard/peer-transfers',
+        slug: 'peer-transfers',
         icon: <FaUserFriends />
     },
 

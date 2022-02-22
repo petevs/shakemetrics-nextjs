@@ -1,17 +1,25 @@
 import { DateRangePicker } from '@mantine/dates'
-import { Text } from '@mantine/core'
+import { Paper, Text, Box, Input, useMantineColorScheme } from '@mantine/core'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import DashboardChart from '../../components/DashboardChart'
+import { IoReturnDownBackSharp } from 'react-icons/io5'
 import DashboardShell from '../../components/DashboardShell'
+import DbChart from '../../components/DbChart'
 import PageHeader from '../../components/PageHeader'
 import ScorecardSection from '../../components/ScorecardSection'
 import CurrencyToggle from '../../components/CurrencyToggle'
-import SelectionSection from '../../components/SelectionSection'
 import Transactions from '../../components/Transactions'
 import { dashboardItems } from '../../data/navItems'
 import useSummary from '../../hooks/useSummary'
-
+import { useState, useEffect } from 'react'
+import { useMediaQuery } from '@mantine/hooks';
+import DbScorecard from '../../components/DbScorecard'
+import DbSelectionSection from '../../components/DbSelectionSection'
+import DbToggle from '../../components/DbToggle'
+import DbSelect from '../../components/DbSelect'
+import { dbPageContent } from '../../lib/dbPageContent'
+import { toBitcoin } from '../../helpers/currencyFormatters'
+import useDbPage from '../../hooks/useDbPage'
 
 export async function getStaticPaths(){
     
@@ -28,13 +36,9 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({ params }) {
 
-    const details = dashboardItems.filter(item => item.slug === params.slug)
-
-    const post = details[0]
-
     return {
         props: {
-            title: post.title,
+            details: dbPageContent[params.slug]
         }
     }
 
@@ -43,49 +47,90 @@ export async function getStaticProps({ params }) {
 
 const DbPage = (props) => {
 
+    const { colorScheme } = useMantineColorScheme();
+    const dark = colorScheme === 'dark';
+
+    const isMobile = useMediaQuery('(max-width: 755px)');
+
     const router = useRouter()
     const { slug } = router.query
+    const { details } = props
 
-    const { trimmedSnapshots, transactions, lastEntry, compare } = useSummary()
-
-    const btcTrans = transactions.filter(transaction => transaction['Debit Currency'] === 'BTC' || transaction['Credit Currency'] === 'BTC')
+    console.log(details)
 
 
-    const categories = trimmedSnapshots.map(item => item.date)
+    // const { 
+    //     trimmedSnapshots, 
+    //     transactions, 
+    //     lastEntry,
+    //     series,
+    //     categories,
+    //     change,
+    //     currentVal,
+    //     endDate 
+    // } = useSummary(familyKey, parentKey, childKey)
 
-    const series = [
-        {
-            name: 'Unrealized Gain',
-            data: trimmedSnapshots.map(item => item.performance.BTC.unrealizedGain)
+    const {
+        familyKey, setFamilyKey,
+        parentKey, setParentKey,
+        childKey, setChildKey,
+        dbToggleData, showDbSelect, dbSelectData,
+        endDate, currentValue, change,
+        series, categories
+
+    } = useDbPage(details)
+
+    //STYLES
+
+    const scorecardTitle = () => {
+        if(childKey) {
+            return `${childKey.replace(/([A-Z])/g, " $1")} (${parentKey})`
         }
-    ]
 
+        return `${parentKey}`
+    }
 
-    const change = compare('performance', 'BTC')
-
-
-    
     return(
         <>
             <Head>
-                <title>{props.title}</title>
+                <title>{details.title}</title>
                 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
             </Head>
-            <DashboardShell
-                slug={slug}
-            >
-                <PageHeader title={props.title} />
-                {/* <ScorecardSection /> */}
-                <DashboardChart 
-                    categories={categories}
-                    series={series}
-                    lastEntry={lastEntry}
-                    val={lastEntry.performance.BTC.unrealizedGain}
-                    change={change['unrealizedGain']}
-                />
-                <Transactions 
-                    transactions={btcTrans}
-                />
+            <DashboardShell>
+                <PageHeader title={details.title} />
+                <Paper
+                    shadow='sm'
+                    radius='md'
+                    withBorder
+                    padding='xl'
+                >
+                    <DbSelectionSection>
+                        <DbToggle
+                            data={dbToggleData}
+                            parentKey={parentKey}
+                            setParentKey={setParentKey}
+                        />
+                        {
+                            showDbSelect &&
+                            <DbSelect
+                                data={dbSelectData}
+                                childKey={childKey}
+                                setChildKey={setChildKey}
+                            />
+                        }
+                    </DbSelectionSection>
+                    <DbScorecard
+                        endDate={endDate}
+                        title={scorecardTitle()}
+                        val={currentValue}
+                        change={change}
+                        isMobile={isMobile}
+                    />
+                    <DbChart 
+                        categories={categories}
+                        series={series}
+                    />
+                </Paper>
             </DashboardShell>
         </>
     )
