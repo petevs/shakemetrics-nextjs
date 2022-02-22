@@ -1,5 +1,4 @@
-import { Paper, Text, Table, Box } from '@mantine/core'
-import dayjs from 'dayjs'
+import { Paper, Text, Table, } from '@mantine/core'
 
 const Transactions = ({ transactions }) => {
 

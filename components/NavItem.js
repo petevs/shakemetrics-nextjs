@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../state/GlobalContext';
-import { UnstyledButton, Group, Avatar, Text, ThemeIcon, useMantineColorScheme, THEME_ICON_SIZES } from '@mantine/core';
-import { IoAnalytics } from 'react-icons/io5'
+import { UnstyledButton, Group, Text, ThemeIcon, useMantineColorScheme } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { toggleNav } from '../state/appReducer';
 

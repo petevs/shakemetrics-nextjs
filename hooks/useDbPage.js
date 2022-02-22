@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../state/GlobalContext'
 import { dbPageContent } from '../lib/dbPageContent'
 import { convertDateToFriendly } from '../helpers/dateRanges'
-import { data } from '../data/dummyData'
+import { data } from '../lib/dummyData'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
 
 const useDbPage = ( details, slug ) => {

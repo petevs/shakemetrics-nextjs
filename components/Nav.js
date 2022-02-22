@@ -1,9 +1,6 @@
-import React from 'react'
-import { Navbar, Text, ScrollArea, Button } from '@mantine/core'
-import MenuItem from './NavItem'
-import { generalItems, dashboardItems, performance } from '../data/navItems'
+import { Navbar, Text, ScrollArea } from '@mantine/core'
+import { generalItems, dashboardItems } from '../lib/navItems'
 import NavGroup from './NavGroup'
-import { FaUserFriends } from 'react-icons/fa'
 
 const Nav = (props) => {
 

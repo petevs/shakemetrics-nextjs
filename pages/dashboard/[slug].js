@@ -8,7 +8,7 @@ import { useMediaQuery } from '@mantine/hooks'
 
 //Library
 import { dbPageContent } from '../../lib/dbPageContent'
-import { dashboardItems } from '../../data/navItems'
+import { dashboardItems } from '../../lib/navItems'
 
 //Hooks
 import useDbPage from '../../hooks/useDbPage'

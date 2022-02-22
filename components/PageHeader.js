@@ -1,5 +1,4 @@
-import { Box, Text, ThemeIcon, Title, Group } from '@mantine/core'
-import React from 'react'
+import { Box, Title, } from '@mantine/core'
 import DateRangeSelection from './DateRangeSelection'
 
 const PageHeader = ({title, icon}) => {
@@ -14,8 +13,6 @@ const PageHeader = ({title, icon}) => {
           gridTemplateColumns: '1fr',
           gap: '1rem'
         }
-        // borderBottom: `1px solid ${theme.colors.dark[0]}`,
-        // marginBottom: `${theme.spacing.lg}px`
     })
 
 
