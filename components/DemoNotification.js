@@ -34,7 +34,7 @@ const DemoNotification = () => {
 
                 >
                     <Text size='lg' weight={700}>Live Demo:</Text>
-                    <Text size='lg'> Import your Shakepay csv file to populate with your data</Text>
+                    <Text size='lg'> Import your Shakepay csv file to populate the report with your data</Text>
                 </Group>
                 <Button leftIcon={<CgImport />} variant='default'>
                     Import Your CSV

@@ -10,6 +10,8 @@ const TOGGLE_NAV = "TOGGLE_NAV"
 
 const CHANGE_DATE_RANGE = "CHANGE_DATE_RANGE"
 
+const SET_RESULTS = 'SET_RESULTS'
+
 export const initialAppState = {
     navOpened: false,
     dateRange: dateRanges["Last 7 Days"],
@@ -21,6 +23,7 @@ export const initialAppState = {
             BTC: 0
         }
     },
+    results: {}
 }
 
 export const appReducer = ( state, action) => {
@@ -60,6 +63,11 @@ export const appReducer = ( state, action) => {
                 dateRange: action.payload.value,
                 dateRangeName: action.payload.name
             }
+        case SET_RESULTS:
+            return {
+                ...state,
+                results: action.payload
+            }
         default:
             return state
     }
@@ -95,4 +103,10 @@ export const toggleNav = ( data ) => {
 //Date Range
 export const changeDateRange = ( data ) => {
     return { type: CHANGE_DATE_RANGE, payload: data}
+}
+
+//CSV results
+
+export const setResults = ( data ) => {
+    return { type: SET_RESULTS, payload: data}
 }
