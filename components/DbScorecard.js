@@ -1,11 +1,25 @@
 import { Text, Title, Group, ThemeIcon } from '@mantine/core'
-import { IoArrowUp, IoArrowDown } from 'react-icons/io5'
+import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
 import { toDollars } from '../helpers/currencyFormatters'
 
 const DbScorecard = ({ title, val, change, isMobile }) => {
 
+    const getChangeColor = () => {
+        if(!change.change){return 'gray'}
+        if(change.change > 0){return 'green'}
+        return 'red'
+    }
 
+    const getChangeText = () => {
+        if(!change.change){ return 'No Change'}
+        return `${change.change} ${change.percent}`
+    }
 
+    const getChangeIcon = () => {
+        if(!change.change){return <IoArrowForward />}
+        if(change.change > 0){return <IoArrowUp />}
+        return <IoArrowDown />
+    }
 
 
   return (
@@ -31,15 +45,15 @@ const DbScorecard = ({ title, val, change, isMobile }) => {
                     <ThemeIcon 
                         radius='xl' 
                         variant='light' 
-                        color={change.change > 0 ? 'green' : 'red'}
+                        color={getChangeColor()}
                     >
-                        { change.change > 0 ? <IoArrowUp /> : <IoArrowDown /> }
+                        {getChangeIcon()}
                     </ThemeIcon>
                     <Text 
                         weight={700} 
-                        color={change.change > 0 ? 'green' : 'red'}
+                        color={getChangeColor()}
                     >
-                        {change.change} {change.percent}
+                        {getChangeText()}
                     </Text>
                 </Group>
             <Text 
