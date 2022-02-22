@@ -4,19 +4,19 @@ import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
 const DbScorecard = ({ title, val, change, isMobile }) => {
 
     const getChangeColor = () => {
-        if(!change.change){return 'gray'}
-        if(change.change > 0){return 'green'}
+        if(!change.raw){return 'gray'}
+        if(change.raw > 0){return 'green'}
         return 'red'
     }
 
     const getChangeText = () => {
-        if(!change.change){ return 'No Change'}
+        if(!change.raw){ return 'No Change'}
         return `${change.change} ${change.percent}`
     }
 
     const getChangeIcon = () => {
-        if(!change.change){return <IoArrowForward />}
-        if(change.change > 0){return <IoArrowUp />}
+        if(!change.raw){return <IoArrowForward />}
+        if(change.raw > 0){return <IoArrowUp />}
         return <IoArrowDown />
     }
 

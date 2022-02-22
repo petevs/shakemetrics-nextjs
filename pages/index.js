@@ -6,7 +6,6 @@ import DashboardShell from '../components/DashboardShell'
 
 export default function Home() {
 
-  console.log(usePrices())
 
   return (
     <div>

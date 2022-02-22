@@ -87,11 +87,10 @@ const useDbPage = ( details, slug ) => {
         const diff = last - first
             const percent = `(${(diff / last * 100).toFixed(2)}%)`
 
-        console.log(familyKey, parentKey, childKey)
-
         return {
             change: formatValue(diff).text,
-            percent: percent
+            percent: percent,
+            raw: diff
         }
     }
 
