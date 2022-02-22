@@ -20,9 +20,9 @@ const Nav = (props) => {
           items={dashboardItems}
         />
       </Navbar.Section>
-      <Navbar.Section>
+      {/* <Navbar.Section>
         <Text>I am the section three</Text>
-      </Navbar.Section>
+      </Navbar.Section> */}
     </>
   )
 }
