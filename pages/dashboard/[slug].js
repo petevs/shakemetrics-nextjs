@@ -74,21 +74,12 @@ const DbPage = (props) => {
         familyKey, setFamilyKey,
         parentKey, setParentKey,
         childKey, setChildKey,
+        noActivity,
         dbToggleData, showDbSelect, dbSelectData,
-        endDate, currentValue, change,
+        getTitle, endDate, currentValue, change,
         series, categories
 
-    } = useDbPage(details)
-
-    //STYLES
-
-    const scorecardTitle = () => {
-        if(childKey) {
-            return `${childKey.replace(/([A-Z])/g, " $1")} (${parentKey})`
-        }
-
-        return `${parentKey}`
-    }
+    } = useDbPage(details, slug)
 
     return(
         <>
@@ -119,17 +110,31 @@ const DbPage = (props) => {
                             />
                         }
                     </DbSelectionSection>
-                    <DbScorecard
-                        endDate={endDate}
-                        title={scorecardTitle()}
-                        val={currentValue}
-                        change={change}
-                        isMobile={isMobile}
-                    />
-                    <DbChart 
-                        categories={categories}
-                        series={series}
-                    />
+                    {
+                        noActivity ?
+                        <Paper  sx={(theme) => ({
+                            display: 'grid',
+                            alignContent: 'center',
+                            justifyContent: 'center',
+                            minHeight: '400px', 
+                            backgroundColor: theme.colors.gray[0]})}>
+                            <Text size='md' color='dimmed'>No activity for this period</Text>
+                        </Paper>
+                        :
+                        <>
+                            <DbScorecard
+                                endDate={endDate}
+                                title={getTitle()}
+                                val={currentValue}
+                                change={change}
+                                isMobile={isMobile}
+                            />
+                            <DbChart 
+                                categories={categories}
+                                series={series}
+                            />
+                        </>
+                    }
                 </Paper>
             </DashboardShell>
         </>

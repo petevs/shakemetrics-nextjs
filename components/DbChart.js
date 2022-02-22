@@ -10,10 +10,19 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 const DbChart = ({ categories, series, title, yAxisType, lastEntry, change, val}) => {
 
 
+
     const { colorScheme } = useMantineColorScheme();
     const dark = colorScheme === 'dark';
 
     const isMobile = useMediaQuery('(max-width: 755px)');
+
+    if(series[0].data.every(item => item === 0)){
+        return (
+            <>No Activity</>
+        )
+    }
+
+    console.log(series[0].data)
 
     const options = {
         theme: {

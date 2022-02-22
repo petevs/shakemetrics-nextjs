@@ -5,7 +5,7 @@ import { convertDateToFriendly } from '../helpers/dateRanges'
 import { data } from '../data/dummyData'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
 
-const useDbPage = ( details ) => {
+const useDbPage = ( details, slug ) => {
 
     const { state } = useContext(GlobalContext)
     const { dateRange } = state
@@ -52,20 +52,25 @@ const useDbPage = ( details ) => {
             return toDollars(val)
         }
 
+        if(familyKey === 'card'){
+            if(parentKey === 'totalCashBackBTC'){ return toBitcoin(val)}
+            return toDollars(val)
+        }
+
         if(parentKey === 'BTC'){ return toBitcoin(val)}
         if(parentKey === 'ETH'){ return toBitcoin(val)}
         if(parentKey === 'CAD'){ return toDollars(val)}
         if(parentKey === 'ALL'){ return toDollars(val)}
 
-        return Math.round(val)
+        return {text: val, raw: Math.round(val)}
     }
 
     const getCurrentValue = () => {
         if(childKey){
-            return formatValue(lastEntry[familyKey][parentKey][childKey])
+            return formatValue(lastEntry[familyKey][parentKey][childKey]).text
         }
 
-        return formatValue(lastEntry[familyKey][parentKey])
+        return formatValue(lastEntry[familyKey][parentKey]).text
     }
 
     const getChange = () => {
@@ -85,8 +90,20 @@ const useDbPage = ( details ) => {
         console.log(familyKey, parentKey, childKey)
 
         return {
-            change: formatValue(diff),
+            change: formatValue(diff).text,
             percent: percent
+        }
+    }
+
+    const getTitle = () => {
+        try {
+            if(showDbSelect){
+                return dbSelectData.filter(item => item.value === childKey)[0].label}
+            if(dbToggleData){
+                return dbToggleData.filter(item => item.value === parentKey)[0].label
+            }
+        } catch (err) {
+            ''
         }
     }
 
@@ -100,8 +117,6 @@ const useDbPage = ( details ) => {
 
     }, [parentKey, childKey, dateRange])
 
-    console.log(currentValue)
-
     
     //GET CHART DATA
 
@@ -111,7 +126,7 @@ const useDbPage = ( details ) => {
 
         const series = [
             { 
-                name: familyKey,
+                name: getTitle(),
                 data: []
             }
         ]
@@ -130,13 +145,15 @@ const useDbPage = ( details ) => {
     const series = getSeries()
     const categories = trimmedSnapshots.map(item => item.date)
 
+    const noActivity = series[0].data.every(item => item === 0)
 
     return {
         familyKey, setFamilyKey,
         parentKey, setParentKey,
         childKey, setChildKey,
+        noActivity,
         dbToggleData, showDbSelect, dbSelectData,
-        endDate, currentValue, change,
+        getTitle, endDate, currentValue, change,
         series, categories
 
     }

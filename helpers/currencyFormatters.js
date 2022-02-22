@@ -1,6 +1,9 @@
 export const toBitcoin = (num) => {
     if(num === 0 ){ return 0.0000000}
-    return Math.round(num * 100000000) / 100000000
+    return {
+        text: Math.round(num * 100000000) / 100000000,
+        raw: Math.round(num * 100000000) / 100000000
+    }
   }
 
 export const numberWithCommas = (x) => {
@@ -15,5 +18,8 @@ const toCurrency = (x) => {
 export const toDollars = (num) => {
     if(num === 0 ){ return 0.00}
     const val = Math.round(num * 100) / 100
-    return toCurrency(val)
+    return {
+        text: toCurrency(val),
+        raw: val
+    }
 }
