@@ -1,6 +1,7 @@
 import { Affix, Button, Group, Paper, Text } from "@mantine/core"
 import { CgImport } from 'react-icons/cg'
 import { useMediaQuery } from "@mantine/hooks"
+import Link from "next/link";
 
 const DemoNotification = () => {
 
@@ -36,9 +37,11 @@ const DemoNotification = () => {
                     <Text size='lg' weight={700}>Live Demo:</Text>
                     <Text size='lg'> Import your Shakepay csv file to populate the report with your data</Text>
                 </Group>
-                <Button leftIcon={<CgImport />} variant='default'>
-                    Import Your CSV
-                </Button>
+                <Link href='/import' passHref>
+                    <Button leftIcon={<CgImport />} variant='default'>
+                        Import Your CSV
+                    </Button>
+                </Link>
             </Paper>
         </Affix>
     </>

@@ -67,7 +67,6 @@ const DbPage = (props) => {
         dbToggleData, showDbSelect, dbSelectData,
         getTitle, endDate, currentValue, change,
         series, categories
-
     } = useDbPage(details, slug)
 
     return(
@@ -118,7 +117,6 @@ const DbPage = (props) => {
                     }
                 </Paper>
             </DashboardShell>
-            <DemoNotification />
         </>
     )
 }

@@ -8,7 +8,7 @@ import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
 const useDbPage = ( details, slug ) => {
 
     const { state } = useContext(GlobalContext)
-    const { dateRange } = state
+    const { dateRange, demo } = state
 
     const [familyKey, setFamilyKey] = useState(details.familyKey)
     const [parentKey, setParentKey] = useState(details.parentKeys[0].key)
@@ -29,7 +29,7 @@ const useDbPage = ( details, slug ) => {
 
     //GET SCORECARD DATA
 
-    const { snapshotObj, snapshotList } = data
+    const { snapshotObj, snapshotList } = state.results.data || data
 
     const startDate = convertDateToFriendly(dateRange[0])
     const endDate = convertDateToFriendly(dateRange[1])
@@ -147,6 +147,7 @@ const useDbPage = ( details, slug ) => {
     const noActivity = series[0].data.every(item => item === 0)
 
     return {
+        demo,
         familyKey, setFamilyKey,
         parentKey, setParentKey,
         childKey, setChildKey,

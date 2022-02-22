@@ -1,12 +1,12 @@
 import Head from "next/head"
-import DashboardShell from "../components/DashboardShell"
+import DashboardShell from "../../components/DashboardShell"
 import { Title, Paper, Group, Text, Box } from "@mantine/core"
 import { Dropzone } from '@mantine/dropzone'
 import { CgImport } from 'react-icons/cg'
 import { FaFileCsv } from 'react-icons/fa'
 import { FiXCircle } from 'react-icons/fi'
 import { useCallback } from "react"
-import useFileUpload from "../hooks/useFileUpload"
+import useFileUpload from "../../hooks/useFileUpload"
 
 const ImportPage = () => {
 

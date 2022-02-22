@@ -12,6 +12,8 @@ const CHANGE_DATE_RANGE = "CHANGE_DATE_RANGE"
 
 const SET_RESULTS = 'SET_RESULTS'
 
+const TOGGLE_DEMO = 'TOGGLE_DEMO'
+
 export const initialAppState = {
     navOpened: false,
     dateRange: dateRanges["Last 7 Days"],
@@ -23,7 +25,8 @@ export const initialAppState = {
             BTC: 0
         }
     },
-    results: {}
+    results: {},
+    demo: true
 }
 
 export const appReducer = ( state, action) => {
@@ -68,6 +71,11 @@ export const appReducer = ( state, action) => {
                 ...state,
                 results: action.payload
             }
+        case TOGGLE_DEMO:
+            return {
+                ...state,
+                demo: action.payload
+            }
         default:
             return state
     }
@@ -109,4 +117,9 @@ export const changeDateRange = ( data ) => {
 
 export const setResults = ( data ) => {
     return { type: SET_RESULTS, payload: data}
+}
+
+//Toggle Demo Verison
+export const toggleDemo = ( data ) => {
+    return { type: TOGGLE_DEMO, payload: data}
 }

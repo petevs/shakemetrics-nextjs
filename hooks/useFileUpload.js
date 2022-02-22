@@ -3,7 +3,7 @@ import { storage, functions } from '../firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { httpsCallable } from 'firebase/functions'
 import { GlobalContext } from '../state/GlobalContext'
-import { setResults } from '../state/appReducer'
+import { setResults, toggleDemo } from '../state/appReducer'
 
 
 const useFileUpload = () => {
@@ -36,6 +36,7 @@ const useFileUpload = () => {
 
         dispatch(setResults(result))
         setPending(false)
+        dispatch(toggleDemo(false))
 
     }
 
