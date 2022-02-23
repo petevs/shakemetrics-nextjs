@@ -1,6 +1,6 @@
 import Head from "next/head"
 import DashboardShell from "../../components/DashboardShell"
-import { Title, Paper, Group, Text, Box } from "@mantine/core"
+import { Title, Paper, Group, Text, Box, Button } from "@mantine/core"
 import { Dropzone } from '@mantine/dropzone'
 import { CgImport } from 'react-icons/cg'
 import { FaFileCsv } from 'react-icons/fa'
@@ -64,6 +64,19 @@ const ImportPage = () => {
                     withBorder
                     padding='xl'
                 >
+                    <Text
+                        mb='sm'
+                        size='sm'
+                        color='blue'
+                        sx={{'& a': {color: 'inherit', textDecoration: 'none'}}}
+                    >
+                    <a 
+                        href='https://help.shakepay.com/en/articles/3336094-where-can-i-see-my-full-transaction-history-on-shakepay'
+                        target="_blank" rel="noreferrer"
+                    >
+                            Where do I get my Shakepay csv?
+                    </a>
+                </Text>
                     <Dropzone
                         onDrop={onDrop}
                         onReject={(files) => console.log('rejected files', files)}

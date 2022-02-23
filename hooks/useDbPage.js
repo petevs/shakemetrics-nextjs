@@ -127,7 +127,7 @@ const useDbPage = ( details, slug ) => {
             { 
                 name: getTitle(),
                 data: []
-            }
+            } 
         ]
 
         if(childKey){

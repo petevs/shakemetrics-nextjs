@@ -1,4 +1,4 @@
-import { Text, Group } from '@mantine/core'
+import { Text, Group, Box } from '@mantine/core'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { GlobalContext } from '../state/GlobalContext'
@@ -16,6 +16,7 @@ const Footer = () => {
     })
 
     return (
+        <Box component='footer'>
             <Text 
                 color='dimmed' 
                 sx={style}
@@ -31,6 +32,7 @@ const Footer = () => {
                 <Link href='/privacy'>Contact</Link>
                 </Group>
             </Text>
+        </Box>
     )
 }
 
