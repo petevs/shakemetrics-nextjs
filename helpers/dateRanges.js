@@ -8,18 +8,25 @@ const getDateRange = ( startSubtract, startUnits, endSubtract = 0, endUnits = 'd
     return [startDate, endDate]
 }
 
-
 const yesterday = getDateRange(1, 'day')
 const lastSevenDays = getDateRange(7, 'days')
 const last30Days = getDateRange(30, 'days')
 
+const prependZero = (val) => {
+    if(val < 10){
+        return `0${val}`
+    }
+
+    return val
+}
+
 const lastMonth = () => {
     const lastMonth = dayjs().month()
     const thisYear = dayjs().year()
-    let startDate = `${lastMonth}-01-${thisYear}`
+    let startDate = `${thisYear}-${prependZero(lastMonth)}-01`
     const daysInMonth = dayjs(startDate).daysInMonth()
     startDate = dayjs(startDate).toDate()
-    const endDate = dayjs(`${lastMonth}-${daysInMonth}-${thisYear}`).toDate()
+    const endDate = dayjs(`${thisYear}-${prependZero(lastMonth)}-${daysInMonth}`).toDate()
     return [startDate, endDate]
 }
 
@@ -27,18 +34,18 @@ const thisMonth = () => {
     const thisMonth = dayjs().month() + 1
     const thisYear = dayjs().year()
     
-    return [dayjs(`${thisMonth}-01-${thisYear}`).toDate(), dayjs().toDate()]
+    return [dayjs(`${thisYear}-${prependZero(thisMonth)}-01`).toDate(), dayjs().toDate()]
 }
 
 const lastYear = () => {
     const pastYear = dayjs().year() - 1
-    const start = dayjs(`01-01-${pastYear}`).toDate()
-    const end = dayjs(`12-31-${pastYear}`).toDate()
+    const start = dayjs(`${pastYear}-01-01`).toDate()
+    const end = dayjs(`${pastYear}-12-31`).toDate()
     return [start, end]
 }
 
 const thisYear = () => {
-    const start = dayjs(`01-01-${dayjs().year()}`).toDate()
+    const start = dayjs(`${dayjs().year()}-01-01`).toDate()
     return [start, dayjs().toDate()]
 }
 

@@ -110,7 +110,6 @@ const useDbPage = ( details, slug ) => {
         }
     }
 
-
     const [currentValue, setCurrentValue] = useState(getCurrentValue())
     const [change, setChange] = useState(getChange())
 
