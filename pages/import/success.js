@@ -1,10 +1,7 @@
 import Head from "next/head"
 import DashboardShell from "../../components/DashboardShell"
-import { Title, Paper, ThemeIcon, Group, Card, Text, useMantineTheme, Button, Box } from "@mantine/core"
-import { IoCheckmarkCircleOutline } from 'react-icons/io5'
-import { dashboardItems } from "../../lib/navItems"
-import Link from "next/link"
-import { IoArrowForward } from 'react-icons/io5'
+import { Title, Text, useMantineTheme, } from "@mantine/core"
+import DashboardCards from "../../components/DashboardCards"
 
 
 const ImportSuccess = () => {
@@ -15,34 +12,6 @@ const ImportSuccess = () => {
         ? theme.colors.dark[1]
         : theme.colors.gray[7];
 
-        const cardSection = (theme) => ({
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: '2rem',
-            paddingTop: '2rem',
-            '& h2': {
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              paddingBottom: '.5rem',
-              color: '#002237'
-            },
-            '& p': {
-              color: '#647795'
-            },
-            '& svg': {
-              height: '18px',
-              width: '18px',
-              marginRight: '.5rem',
-            },
-            [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
-                gridTemplateColumns: '1fr 1fr',
-            },
-            [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-              gridTemplateColumns: '1fr',
-              gap: '1rem'
-            }
-          })
-
     return (
         <>
             <Head>
@@ -51,51 +20,13 @@ const ImportSuccess = () => {
             <link rel="icon" href="/favicon.ico" />
             </Head>
             <DashboardShell>
-                    <Title color='dimmed' size='xl' weight={700} mb='xl'>
-                        Success
-                    </Title>
-                    <Text color='dimmed'>Right on! Your data has been successfuly imported. What do you want to see first?</Text>
-                    <Box sx={cardSection}>
-                        {
-                            dashboardItems.map( item => (
-                                <Link href={item.path} passHref key={item.id} >
-                                    <Card 
-                                        shadow="lg"
-                                        radius='md' 
-                                        padding="md"
-                                        withBorder
-                                        sx={(theme) => ({
-                                            display: 'grid',
-                                            ':hover': {
-                                                border: `1px solid #248BE5`,
-                                                cursor: 'pointer',
-                                                transform: 'scale(1.05)',
-                                                transition: 'all .2s ease-in-out'
-                                            }
-                                        })}
-                                    >
-                                        <Text 
-                                            weight={700}
-                                            size='xl'
-                                        >
-                                            {item.title}
-                                        </Text>
-                                        <Box sx={{minHeight: '50px'}}>
-                                            <Text 
-                                            size="sm" 
-                                            style={{ 
-                                                color: secondaryColor, 
-                                                lineHeight: 1.5, 
-                                            }}
-                                            >
-                                                {item.description}
-                                            </Text>
-                                        </Box>
-                                    </Card>
-                                </Link>
-                            ))
-                        }
-                </Box>
+                <Title color='dimmed' size='xl' weight={700} mb='xl'>
+                    Success
+                </Title>
+                <Text color='dimmed'>
+                    Right on! Your data has been successfuly imported. What do you want to see first?
+                </Text>
+                <DashboardCards left={true} />
 
             </DashboardShell>
         </>

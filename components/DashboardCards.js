@@ -1,8 +1,8 @@
-import { Box, Card, Text, useMantineTheme } from '@mantine/core'
+import { Box, Card, Text, ThemeIcon, useMantineTheme, Group } from '@mantine/core'
 import Link from 'next/link'
 import { dashboardItems } from '../lib/navItems'
 
-const DashboardCards = ({sx}) => {
+const DashboardCards = ({left, sx}) => {
 
     const theme = useMantineTheme();
 
@@ -27,7 +27,6 @@ const DashboardCards = ({sx}) => {
         '& svg': {
             height: '18px',
             width: '18px',
-            marginRight: '.5rem',
         },
         [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
             gridTemplateColumns: '1fr 1fr',
@@ -59,12 +58,20 @@ const DashboardCards = ({sx}) => {
                                             }
                                         })}
                                     >
-                                        <Text 
-                                            weight={700}
-                                            size='xl'
+                                        <Group 
+                                            position={left ? 'left': 'center'}
+                                            mb='xs'
                                         >
-                                            {item.title}
-                                        </Text>
+                                            <ThemeIcon variant='light' size='sm'>
+                                                {item.icon}
+                                            </ThemeIcon>
+                                            <Text 
+                                                weight={700}
+                                                size='xl'
+                                            >
+                                                {item.title}
+                                            </Text>
+                                        </Group>
                                         <Box sx={{minHeight: '50px'}}>
                                             <Text 
                                             size="sm" 
