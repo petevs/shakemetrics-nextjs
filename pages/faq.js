@@ -1,4 +1,4 @@
-import { Accordion} from "@mantine/core"
+import { Accordion } from "@mantine/core"
 import BasicPageLayout from "../components/BasicPageLayout"
 import { frequentlyAskedQuestions } from "../lib/frequentlyAskedQuestions"
 
