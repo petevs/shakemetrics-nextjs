@@ -1,5 +1,5 @@
 import { Navbar, Text, ScrollArea } from '@mantine/core'
-import { generalItems, dashboardItems } from '../lib/navItems'
+import { generalItems, dashboardItems, getStarted } from '../lib/navItems'
 import NavGroup from './NavGroup'
 
 const Nav = (props) => {
@@ -17,6 +17,11 @@ const Nav = (props) => {
         component={ScrollArea}
         sx={scrollAreaStyle}
       >
+        <NavGroup
+          title='Get Started'
+          items={getStarted}
+          setOpened={props.setOpened}
+        />
         <NavGroup
           title='General'
           items={generalItems}
