@@ -39,7 +39,7 @@ const DbChart = ({ categories, series }) => {
             labels: {
                 formatter: value => Math.round(value * 10000000) / 10000000
             }
-        }
+        },
     }
 
     return (
