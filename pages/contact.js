@@ -1,5 +1,5 @@
 import BasicPageLayout from "../components/BasicPageLayout"
-import { Text } from '@mantine/core'
+import { Divider, Text } from '@mantine/core'
 
 const Contact = () => {
 
@@ -19,9 +19,8 @@ const Contact = () => {
             firstSection={
                 <>
                     <Text 
-                        size='xl' 
+                        size='lg' 
                         weight={500} 
-                        mb='xs'
                     >
                         Email
                     </Text>
@@ -35,10 +34,9 @@ const Contact = () => {
                         </a>
                     </Text>
                     <Text 
-                        size='xl' 
+                        size='lg' 
                         weight={500} 
                         mt='xl'
-                        mb='xs'
                     >
                         Mailing Address
                     </Text>
