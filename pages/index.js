@@ -1,14 +1,23 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import usePrices from '../hooks/usePrices'
 import DashboardShell from '../components/DashboardShell'
-import { AppShell, Text, Title, Box, Button, Group, Highlight } from '@mantine/core'
-import DashboardPage from '../components/DashboardPage'
+import { Text, Box, Button, Group, useMantineTheme } from '@mantine/core'
 import DashboardCards from '../components/DashboardCards'
 import Link from 'next/link'
 
 export default function Home() {
+
+  const theme = useMantineTheme();
+
+  const secondaryColor = theme.colorScheme === 'dark'
+      ? theme.colors.dark[1]
+      : theme.colors.gray[7];
+
+  const headlineStyle = (theme) => ({
+    fontSize: '3.5rem',
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      fontSize: '2.5rem',
+    }
+  })
 
 
   return (
@@ -23,31 +32,31 @@ export default function Home() {
         <Group direction='column' position='center' sx={{textAlign: 'center'}} spacing={0}>
           <Text>Free Shakepay Extension</Text>
           <Text 
-            sx={{fontSize: '3.5rem'}} 
+            sx={headlineStyle} 
             weight={700}
           >
             Skip the Spreadsheets.
           </Text>
-          <Box sx={{maxWidth: '600px'}}>
+          <Box sx={{maxWidth: '750px'}}>
             <Text
               size='lg'
-              color='dimmed'
               mt='xs'
+              mb='md'
               weight={500}
-            >
-            <Highlight 
-              highlight="Shakepay"
-              highlightStyles={(theme) => ({
-                color: theme.colors.blue[4],
-                backgroundColor: 'transparent',
-                fontWeight: 700,
+              sx={(theme) => ({
+                color: secondaryColor,
+                '& span': {
+                  fontWeight: 700,
+                },
+                '& .highlight': {
+                  color: theme.colors.blue[4]
+                }
               })}
             >
-              Instantly see how your Shakepay portfolio is performing, your stats from #shakingsats and your #cashbackcard, tax details and more, without having to spend your time digging through and trying to make sense of CSV files
-            </Highlight>
+              Instantly see how your <span className='highlight'>Shakepay</span> portfolio is performing, stats from <span>#shakingsats</span> and using your <span>#cashbackcard</span>, tax details and more, without having to spend your time digging through and trying to make sense of your raw CSV file
             </Text>
           </Box>
-          <Group spacing='sm' mt='md'>
+          <Group spacing='sm' mt='md' mb='md'>
             <Link href='/import' passHref>
               <Button
                 size='md'
