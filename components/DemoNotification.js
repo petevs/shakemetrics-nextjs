@@ -20,12 +20,14 @@ const DemoNotification = () => {
 
   return (
     <>
-        <Affix position={{ 
-            bottom: 30, 
-            right: 30,
-            left: isMobile ? 30 : 280, 
-            width: 'auto',
-            // height: '50px' 
+        <Affix
+            zIndex={99} 
+            position={{ 
+                bottom: 30, 
+                right: 30,
+                left: isMobile ? 30 : 280, 
+                width: 'auto',
+                // height: '50px' 
             }}>
             <Paper shadow='xl' radius='md' withBorder padding='md' sx={style}>
                 <Group 

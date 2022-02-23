@@ -4,11 +4,18 @@ import NavGroup from './NavGroup'
 
 const Nav = (props) => {
 
+  const scrollAreaStyle = {
+    '& .mantine-ScrollArea-viewport': {
+      paddingBottom: '300px'
+    }
+  }
+
   return (
     <>
       <Navbar.Section 
         grow
         component={ScrollArea}
+        sx={scrollAreaStyle}
       >
         <NavGroup
           title='General'
