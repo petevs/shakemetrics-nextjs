@@ -34,7 +34,7 @@ const useFileUpload = () => {
         setUrl(downloadURL)
 
         const result = await parseData({ url: downloadURL})
-        console.log(result)
+        // console.log(result)
 
         dispatch(setResults(result))
         setPending(false)

@@ -20,11 +20,30 @@ const useDbPage = ( details, slug ) => {
         setChildKey(details.childKeys ? details.childKeys[0].key : details.childKeys)
     },[details])
 
-
     //Toggle and Select Data
-    const dbToggleData = details.parentKeys.map( item => ({value: item.key, label: item.label}))
-    const showDbSelect = details.childKeys ? true : false
-    const dbSelectData = showDbSelect && details.childKeys.map( item => ({value: item.key, label: item.label}))
+
+    const { toggle, menu } = details
+
+    const getToggleData = () => {
+        if(!toggle){
+            return null
+        }
+        return details.parentKeys.map( item => ({value: item.key, label: item.label}))
+    }
+
+    const getSelectData = () => {
+        if(menu === 'parent'){
+            return details.parentKeys.map( item => ({value: item.key, label: item.label}))
+        }
+        if(!menu){
+            return null
+        }
+        
+        return details.childKeys.map( item => ({value: item.key, label: item.label}))
+    }
+
+    const dbToggleData = getToggleData()
+    const dbSelectData = getSelectData()
 
 
     //GET SCORECARD DATA
@@ -100,10 +119,13 @@ const useDbPage = ( details, slug ) => {
 
     const getTitle = () => {
         try {
-            if(showDbSelect){
+            if(menu && toggle){ 
                 return dbSelectData.filter(item => item.value === childKey)[0].label}
-            if(dbToggleData){
+            if(toggle && !menu){
                 return dbToggleData.filter(item => item.value === parentKey)[0].label
+            }
+            if(!toggle && menu){
+                return dbSelectData.filter(item => item.value === parentKey)[0].label
             }
         } catch (err) {
             ''
@@ -155,7 +177,8 @@ const useDbPage = ( details, slug ) => {
         parentKey, setParentKey,
         childKey, setChildKey,
         noActivity,
-        dbToggleData, showDbSelect, dbSelectData,
+        toggle, menu,
+        dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change,
         series, categories
 

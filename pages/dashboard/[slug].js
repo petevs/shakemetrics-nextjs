@@ -64,7 +64,8 @@ const DbPage = (props) => {
         parentKey, setParentKey,
         childKey, setChildKey,
         noActivity,
-        dbToggleData, showDbSelect, dbSelectData,
+        toggle, menu,
+        dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change,
         series, categories
     } = useDbPage(details, slug)
@@ -83,18 +84,24 @@ const DbPage = (props) => {
                     withBorder
                     padding='xl'
                 >
-                    <DbSelectionSection>
-                        <DbToggle
-                            data={dbToggleData}
-                            parentKey={parentKey}
-                            setParentKey={setParentKey}
-                        />
+                    <DbSelectionSection
+                        toggle={toggle}
+                        menu={menu}
+                    >
                         {
-                            showDbSelect &&
+                            dbToggleData &&
+                            <DbToggle
+                                data={dbToggleData}
+                                parentKey={parentKey}
+                                setParentKey={setParentKey}
+                            />
+                        }
+                        {
+                            dbSelectData &&
                             <DbSelect
                                 data={dbSelectData}
-                                childKey={childKey}
-                                setChildKey={setChildKey}
+                                childKey={menu === 'parent' ? parentKey : childKey}
+                                setChildKey={menu === 'parent' ? setParentKey : setChildKey}
                             />
                         }
                     </DbSelectionSection>

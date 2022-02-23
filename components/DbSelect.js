@@ -17,6 +17,7 @@ const DbSelect = ({data, childKey, setChildKey}) => {
         data={data}
         value={childKey}
         onChange={setChildKey}
+        mb='md'
     />
   )
 }
