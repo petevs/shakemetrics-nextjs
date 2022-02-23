@@ -1,11 +1,10 @@
-import { Title } from "@mantine/core"
-import DashboardShell from "../components/DashboardShell"
+import BasicPageLayout from "../components/BasicPageLayout"
 
 const AboutPage = () => {
   return (
-    <DashboardShell>
-        <Title>About</Title>
-    </DashboardShell>
+    <BasicPageLayout
+      title='About'
+    />
   )
 }
 

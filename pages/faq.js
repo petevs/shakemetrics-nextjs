@@ -1,19 +1,12 @@
-import { Accordion, Title, Paper } from "@mantine/core"
-import DashboardShell from "../components/DashboardShell"
+import { Accordion} from "@mantine/core"
+import BasicPageLayout from "../components/BasicPageLayout"
 import { frequentlyAskedQuestions } from "../lib/frequentlyAskedQuestions"
 
 const FAQPage = () => {
   return (
-    <DashboardShell>
-      <Title color='dimmed' size='xl' weight={700} mb='xl'>
-        Frequently Asked Questions
-      </Title>
-      <Paper
-          shadow='sm'
-          radius='md'
-          withBorder
-          padding='xl'
-      >
+    <BasicPageLayout
+      title='Frequently Asked Questions'
+      firstSection={
         <Accordion>
         {
           frequentlyAskedQuestions.map( (item, idx) => (
@@ -23,8 +16,8 @@ const FAQPage = () => {
           ))
         }
         </Accordion>
-      </Paper>
-    </DashboardShell>
+      }
+    />
   )
 }
 

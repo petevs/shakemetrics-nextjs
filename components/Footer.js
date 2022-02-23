@@ -28,8 +28,8 @@ const Footer = () => {
                 >
                 <>© 2022 Shake Metrics</>
                 <Link href='/privacy'>Privacy</Link>
-                <Link href='/privacy'>Terms</Link>
-                <Link href='/privacy'>Contact</Link>
+                <Link href='/terms'>Terms</Link>
+                <Link href='/contact'>Contact</Link>
                 </Group>
             </Text>
         </Box>
