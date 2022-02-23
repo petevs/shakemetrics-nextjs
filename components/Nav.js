@@ -1,4 +1,4 @@
-import { Navbar, Text, ScrollArea } from '@mantine/core'
+import { Navbar, ScrollArea, } from '@mantine/core'
 import { generalItems, dashboardItems, getStarted } from '../lib/navItems'
 import NavGroup from './NavGroup'
 
@@ -32,9 +32,6 @@ const Nav = (props) => {
           items={dashboardItems}
         />
       </Navbar.Section>
-      {/* <Navbar.Section>
-        <Text>I am the section three</Text>
-      </Navbar.Section> */}
     </>
   )
 }

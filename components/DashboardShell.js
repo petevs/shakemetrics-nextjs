@@ -6,6 +6,7 @@ import Nav from './Nav';
 import DashboardPage from './DashboardPage';
 import DemoNotification from './DemoNotification';
 import { toggleNav } from '../state/appReducer';
+import Footer from './Footer';
 
 const DashboardShell = ({ children }) => {
   const { state, dispatch } = useContext(GlobalContext)
@@ -47,6 +48,7 @@ const DashboardShell = ({ children }) => {
       >
         <DashboardPage>
           {children}
+        <Footer />
         </DashboardPage>
       </AppShell>
       {demo && <DemoNotification />}
