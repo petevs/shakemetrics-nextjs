@@ -15,9 +15,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <DashboardShell>
-        I am the dashboard
-      </DashboardShell>
+      <div>
+        coming soon  
+      </div>
 
     </div>
   )
