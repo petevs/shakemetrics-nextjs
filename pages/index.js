@@ -3,6 +3,10 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import usePrices from '../hooks/usePrices'
 import DashboardShell from '../components/DashboardShell'
+import { AppShell, Text, Title, Box, Button, Group, Highlight } from '@mantine/core'
+import DashboardPage from '../components/DashboardPage'
+import DashboardCards from '../components/DashboardCards'
+import Link from 'next/link'
 
 export default function Home() {
 
@@ -15,9 +19,56 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        coming soon  
-      </div>
+      <DashboardShell noNav={true}>
+        <Group direction='column' position='center' sx={{textAlign: 'center'}} spacing={0}>
+          <Text>Free Shakepay Extension</Text>
+          <Text 
+            sx={{fontSize: '3.5rem'}} 
+            weight={700}
+          >
+            Skip the Spreadsheets.
+          </Text>
+          <Box sx={{maxWidth: '600px'}}>
+            <Text
+              size='lg'
+              color='dimmed'
+              mt='xs'
+              weight={500}
+            >
+            <Highlight 
+              highlight="Shakepay"
+              highlightStyles={(theme) => ({
+                color: theme.colors.blue[4],
+                backgroundColor: 'transparent',
+                fontWeight: 700,
+              })}
+            >
+              Instantly see how your Shakepay portfolio is performing, your stats from #shakingsats and your #cashbackcard, tax details and more, without having to spend your time digging through and trying to make sense of CSV files
+            </Highlight>
+            </Text>
+          </Box>
+          <Group spacing='sm' mt='md'>
+            <Link href='/import' passHref>
+              <Button
+                size='md'
+              >
+                See Your Report
+              </Button>
+            </Link>
+            <Link href='/dashboard/performance' passHref>
+              <Button 
+                variant='outline'
+                size='md'
+              >
+                See Live Demo
+              </Button>
+            </Link>
+          </Group>
+          <Box sx={{maxWidth: '750px'}}>
+            <DashboardCards sx={{gridTemplateColumns: '1fr 1fr'}}/>
+          </Box>
+        </Group>
+      </DashboardShell>
 
     </div>
   )

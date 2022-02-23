@@ -8,7 +8,7 @@ import DemoNotification from './DemoNotification';
 import { toggleNav } from '../state/appReducer';
 import Footer from './Footer';
 
-const DashboardShell = ({ children }) => {
+const DashboardShell = ({ noNav, children }) => {
   const { state, dispatch } = useContext(GlobalContext)
   const { demo } = state
   const theme = useMantineTheme();
@@ -19,29 +19,40 @@ const DashboardShell = ({ children }) => {
         navbarOffsetBreakpoint="sm"
         fixed
         navbar={
-          <Navbar
-            padding="md"
-            hiddenBreakpoint="sm"
-            hidden={!state.navOpened}
-            width={{ sm: 250 }}
-          >
-            <Nav />
-          </Navbar>
+          noNav 
+          ? 
+            <></>
+          :
+            <Navbar
+              padding="md"
+              hiddenBreakpoint="sm"
+              hidden={!state.navOpened}
+              width={{ sm: 250 }}
+            >
+              <Nav />
+            </Navbar>
         }
         header={
           <Header height={70} padding="md">
-            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-              <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                <Burger
-                  opened={state.navOpened}
-                  onClick={() => dispatch(toggleNav())}
-                  size="sm"
-                  color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              </MediaQuery>
-
-              <DashboardHeader />
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              height: '100%',
+              justifyContent: 'center', 
+            }}>
+              {
+                !noNav &&
+                <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                  <Burger
+                    opened={state.navOpened}
+                    onClick={() => dispatch(toggleNav())}
+                    size="sm"
+                    color={theme.colors.gray[6]}
+                    mr="xl"
+                  />
+                </MediaQuery>
+              }
+              <DashboardHeader noNav={noNav} />
             </div>
           </Header>
         }
@@ -51,7 +62,7 @@ const DashboardShell = ({ children }) => {
         </DashboardPage>
         <Footer />
       </AppShell>
-      {demo && <DemoNotification />}
+      {(demo && !noNav) && <DemoNotification />}
     </>
   );
 }
