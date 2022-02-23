@@ -15,12 +15,11 @@ const ImportSuccess = () => {
         ? theme.colors.dark[1]
         : theme.colors.gray[7];
 
-        const cardSection = {
+        const cardSection = (theme) => ({
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1fr 1fr 1fr',
             gap: '2rem',
             paddingTop: '2rem',
-            maxWidth: '900px',
             '& h2': {
               fontSize: '1.3rem',
               fontWeight: 700,
@@ -35,11 +34,14 @@ const ImportSuccess = () => {
               width: '18px',
               marginRight: '.5rem',
             },
-            '@media (max-width: 900px)': {
+            [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
+                gridTemplateColumns: '1fr 1fr',
+            },
+            [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
               gridTemplateColumns: '1fr',
               gap: '1rem'
             }
-          }
+          })
 
     return (
         <>
@@ -56,46 +58,44 @@ const ImportSuccess = () => {
                     <Box sx={cardSection}>
                         {
                             dashboardItems.map( item => (
-                                <Card 
-                                    key={item.id} 
-                                    shadow="lg"
-                                    radius='md' 
-                                    padding="lg"
-                                    withBorder
-                                >
-                                    <Text 
-                                        weight={700}
-                                        size='xl'
+                                <Link href={item.path} passHref key={item.id} >
+                                    <Card 
+                                        shadow="lg"
+                                        radius='md' 
+                                        padding="md"
+                                        withBorder
+                                        sx={(theme) => ({
+                                            display: 'grid',
+                                            ':hover': {
+                                                border: `1px solid #248BE5`,
+                                                cursor: 'pointer',
+                                                transform: 'scale(1.05)',
+                                                transition: 'all .2s ease-in-out'
+                                            }
+                                        })}
                                     >
-                                        {item.title}
-                                    </Text>
-                                    <Box sx={{minHeight: '50px'}}>
                                         <Text 
-                                        size="sm" 
-                                        style={{ 
-                                            color: secondaryColor, 
-                                            lineHeight: 1.5, 
-                                        }}
+                                            weight={700}
+                                            size='xl'
                                         >
-                                            {item.description}
+                                            {item.title}
                                         </Text>
-                                    </Box>
-                                    <Link href={item.path} passHref>
-                                        <Button 
-                                            variant="outline" 
-                                            color="blue" 
-                                            fullWidth
-                                            size='sm' 
-                                            style={{ marginTop: 14 }}
-                                            rightIcon={<IoArrowForward />}
-                                        >
-                                            Go to {item.title}
-                                        </Button>
-                                    </Link>
-                                </Card>
+                                        <Box sx={{minHeight: '50px'}}>
+                                            <Text 
+                                            size="sm" 
+                                            style={{ 
+                                                color: secondaryColor, 
+                                                lineHeight: 1.5, 
+                                            }}
+                                            >
+                                                {item.description}
+                                            </Text>
+                                        </Box>
+                                    </Card>
+                                </Link>
                             ))
                         }
-                    </Box>
+                </Box>
 
             </DashboardShell>
         </>

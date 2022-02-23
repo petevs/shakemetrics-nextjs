@@ -48,8 +48,8 @@ const DashboardShell = ({ children }) => {
       >
         <DashboardPage>
           {children}
-        <Footer />
         </DashboardPage>
+        <Footer />
       </AppShell>
       {demo && <DemoNotification />}
     </>
