@@ -84,8 +84,12 @@ const useDbPage = ( details, slug ) => {
             last = lastEntry[familyKey][parentKey][childKey]
         }
 
+
         const diff = last - first
-            const percent = `(${(diff / last * 100).toFixed(2)}%)`
+        const rawPercent = diff / first * 100
+        const percent = rawPercent === Infinity ? '(100%)' : `(${(diff / first * 100).toFixed(2)}%)`
+
+
 
         return {
             change: formatValue(diff).text,
