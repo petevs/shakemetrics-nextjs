@@ -70,6 +70,7 @@ const DbPage = (props) => {
         series, categories
     } = useDbPage(details, slug)
 
+
     return(
         <>
             <Head>

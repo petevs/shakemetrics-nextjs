@@ -56,7 +56,7 @@ const useDbPage = ( details, slug ) => {
     const lastIndex = snapshotList.length - 1
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
     const lastEntry = snapshotObj[endDate] || snapshotList[lastIndex]
-    
+
 
     const formatValue = (val) => {
 

@@ -1,5 +1,11 @@
 export const toBitcoin = (num) => {
-    if(num === 0 ){ return 0.0000000}
+    if(num === 0 ){ 
+        return {
+            text: '0.0000000',
+            raw: 0
+        }
+    }
+
     return {
         text: Math.round(num * 100000000) / 100000000,
         raw: Math.round(num * 100000000) / 100000000

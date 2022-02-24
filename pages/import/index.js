@@ -1,32 +1,18 @@
 import Head from "next/head"
 import DashboardShell from "../../components/DashboardShell"
-import { Title, Paper, Group, Text, Box, Button, Alert } from "@mantine/core"
+import { Title, Paper, Group, Text, Box, Button, Alert, Progress } from "@mantine/core"
 import { Dropzone } from '@mantine/dropzone'
 import { CgImport } from 'react-icons/cg'
-import { FaFileCsv } from 'react-icons/fa'
 import { FiXCircle } from 'react-icons/fi'
+import { IoCheckmarkCircleOutline } from 'react-icons/io5'
 import { useCallback } from "react"
 import useFileUpload from "../../hooks/useFileUpload"
 
 const ImportPage = () => {
 
-
-    const ImageIcon = ({ status, ...props}) => {
-
-        if(status.accepted){
-            return <FaFileCsv />
-        }
-
-        if(status.rejected){
-            return <FiXCircle />
-        }
-
-        return <CgImport />
-    }
-
     const {
         error, setError,
-        pending,
+        pending, success,
         uploadFile
     } = useFileUpload()
 
@@ -35,17 +21,18 @@ const ImportPage = () => {
     }, [uploadFile])
 
 
-    const groupStyle = { 
+    const groupStyle = (theme) => ({
         minHeight: 220, 
         pointerEvents: 'none',
         '& svg': {
             height: '80px',
-            width: '80px'
+            width: '80px',
+            color: success ? theme.colors.green[5] : theme.colors.blue[5],
         },
         '@media (max-width: 768px)': {
             textAlign: 'center'
         } 
-    }
+    })
 
     return (
         <>
@@ -81,7 +68,7 @@ const ImportPage = () => {
                 </Text>
                 {
                     error.error && 
-                    <Alert icon={<FiXCircle size={16} />} title="Bummer!" color="red" mb='xl'>
+                    <Alert icon={<FiXCircle size={16} />} title="Hmmm... there seems to be an issue with your CSV!" color="red" mb='xl'>
                         {error.message}
                     </Alert>
                 }
@@ -92,19 +79,35 @@ const ImportPage = () => {
                         loading={pending}
                     >
                         {
-                            (status) => (
+                            () => (
                                 <Group position="center" spacing="xl" sx={groupStyle}>
-                                    <ImageIcon 
-                                    status={status}
-                                    />
-                                    <Box>
-                                        <Text size='xl' inline>
-                                            Drag your Shakepay csv file here or click to select file
-                                        </Text>
-                                        <Text size='sm' color='dimmed' inline mt={7}>
-                                            File should be an unaltered Shakepay transactions csv
-                                        </Text>
-                                    </Box>
+                                    {
+                                        !success 
+                                        ?
+                                        <>
+                                            <CgImport/>
+                                            <Box>
+                                                <Text size='xl' inline mt='md'>
+                                                    Drag your Shakepay csv file here or click to select file
+                                                </Text>
+                                                <Text size='sm' color='dimmed' inline mt={7}>
+                                                    File should be an unaltered Shakepay transactions csv
+                                                </Text>
+                                            </Box>
+                                        </>
+                                        : <>
+                                            <IoCheckmarkCircleOutline/>
+                                            <Box>
+                                                <Text size='xl' inline mt='md'>
+                                                    Nice! Your report is ready!
+                                                </Text>
+                                                <Text size='sm' color='dimmed' inline mt={7}>
+                                                    You will be redirected in a few seconds...
+                                                </Text>
+                                            </Box>
+                                        
+                                        </>
+                                    }
                                 </Group>
                             )
                         }

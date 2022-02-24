@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { storage, functions } from '../firebase'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { httpsCallable } from 'firebase/functions'
 import { GlobalContext } from '../state/GlobalContext'
 import { setResults, toggleDemo } from '../state/appReducer'
@@ -19,6 +19,7 @@ const useFileUpload = () => {
         error: false,
         message: ''
     })
+    const [success, setSuccess] = useState(false)
 
     const { dispatch } = useContext(GlobalContext)
 
@@ -40,17 +41,20 @@ const useFileUpload = () => {
         try {
             const result = await parseData({ url: downloadURL})
             console.log(result)
-            dispatch(setResults(result))
             setPending(false)
+            setSuccess(true)
+            dispatch(setResults(result))
             dispatch(toggleDemo(false))
             router.push('/import/success')
+            deleteObject(fileRef)
         }
         catch(err){
             setPending(false)
             setError({
                 error: true,
-                message: err.message
+                message: "The csv file uploaded is not an unaltered Shakepay transaction csv file. Please, try again and make sure it is the original file. If the error persists and you think there is an issue please contact support at hello@shakemetrics.com."
             })
+            deleteObject(fileRef)
         }
         // console.log(result)
 
@@ -61,7 +65,7 @@ const useFileUpload = () => {
     return {
         file,
         setFile,
-        pending,
+        pending, success,
         error, setError,
         url,
         readyToSubmit,
