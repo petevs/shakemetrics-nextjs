@@ -26,7 +26,8 @@ const DashboardHeader = ({noNav}) => {
         gridTemplateColumns: 'auto auto',
         fontWeight: 700,
         ':hover': {
-            cursor: 'pointer'
+            cursor: 'pointer',
+            color: theme.colors.blue[6]
         }
     })
 

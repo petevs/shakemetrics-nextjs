@@ -56,9 +56,16 @@ const useDbPage = ( details, slug ) => {
 
     const lastIndex = snapshotList.length - 1
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
-    let lastEntry = updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex])
+    const [lastEntry, setLastEntry] = useState(updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex]))
     snapshotList.pop()
     snapshotList.push(lastEntry)
+
+    useEffect(() => {
+        const newEntry = updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex])
+        setLastEntry(newEntry)
+        snapshotList.pop()
+        snapshotList.push(newEntry)
+    }, [price, snapshotObj, endDate, snapshotList, lastIndex])
 
     const formatValue = (val) => {
 
@@ -145,7 +152,8 @@ const useDbPage = ( details, slug ) => {
         setCurrentValue(getCurrentValue())
         setChange(getChange())
 
-    }, [parentKey, childKey, dateRange])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [parentKey, childKey, dateRange, lastEntry])
 
     
     //GET CHART DATA
