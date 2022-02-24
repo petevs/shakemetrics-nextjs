@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { data } from '../lib/dummyData'
 
 
 const getDateRange = ( startSubtract, startUnits, endSubtract = 0, endUnits = 'days' ) => {
@@ -53,7 +54,7 @@ const thisYear = () => {
 const last3Months = getDateRange(3, 'months')
 const last6Months = getDateRange(6, 'months')
 const last12Months = getDateRange(12, 'months')
-const allTime = [dayjs('2016-01-01').toDate(), dayjs().toDate()]
+const allTime = [dayjs(data.snapshotList[0].date).toDate(), dayjs().toDate()]
 
 
 export const dateRanges = {

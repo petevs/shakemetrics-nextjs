@@ -76,6 +76,10 @@ const useDbPage = ( details, slug ) => {
             return toDollars(val)
         }
 
+        if(familyKey === 'historicalPrice'){
+            return (toDollars(val))
+        }
+
         if(parentKey === 'BTC'){ return toBitcoin(val)}
         if(parentKey === 'ETH'){ return toBitcoin(val)}
         if(parentKey === 'CAD'){ return toDollars(val)}
