@@ -1,16 +1,10 @@
 import Head from "next/head"
 import DashboardShell from "../../components/DashboardShell"
-import { Title, Text, useMantineTheme, } from "@mantine/core"
+import { Title, Text, } from "@mantine/core"
 import DashboardCards from "../../components/DashboardCards"
 
 
 const ImportSuccess = () => {
-
-    const theme = useMantineTheme();
-
-    const secondaryColor = theme.colorScheme === 'dark'
-        ? theme.colors.dark[1]
-        : theme.colors.gray[7];
 
     return (
         <>

@@ -15,6 +15,10 @@ const useFileUpload = () => {
     const [pending, setPending] = useState(false)
     const [url, setUrl] = useState('')
     const [readyToSubmit, setReadyToSubmit] = useState(false)
+    const [error, setError] = useState({
+        error: false,
+        message: ''
+    })
 
     const { dispatch } = useContext(GlobalContext)
 
@@ -28,18 +32,28 @@ const useFileUpload = () => {
 
         //Make ref to storage storage bucket
         const fileRef = ref(storage, `uploads/${Date.now()}`)
+        setError(true)
         setPending(true)
         await uploadBytes(fileRef, uploadFile)
         const downloadURL = await getDownloadURL(fileRef)
         setUrl(downloadURL)
-
-        const result = await parseData({ url: downloadURL})
+        try {
+            const result = await parseData({ url: downloadURL})
+            console.log(result)
+            dispatch(setResults(result))
+            setPending(false)
+            dispatch(toggleDemo(false))
+            router.push('/import/success')
+        }
+        catch(err){
+            setPending(false)
+            setError({
+                error: true,
+                message: err.message
+            })
+        }
         // console.log(result)
 
-        dispatch(setResults(result))
-        setPending(false)
-        dispatch(toggleDemo(false))
-        router.push('/import/success')
 
     }
 
@@ -48,6 +62,7 @@ const useFileUpload = () => {
         file,
         setFile,
         pending,
+        error, setError,
         url,
         readyToSubmit,
         handleFileChange,

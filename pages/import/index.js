@@ -1,6 +1,6 @@
 import Head from "next/head"
 import DashboardShell from "../../components/DashboardShell"
-import { Title, Paper, Group, Text, Box, Button } from "@mantine/core"
+import { Title, Paper, Group, Text, Box, Button, Alert } from "@mantine/core"
 import { Dropzone } from '@mantine/dropzone'
 import { CgImport } from 'react-icons/cg'
 import { FaFileCsv } from 'react-icons/fa'
@@ -25,6 +25,7 @@ const ImportPage = () => {
     }
 
     const {
+        error, setError,
         pending,
         uploadFile
     } = useFileUpload()
@@ -65,6 +66,7 @@ const ImportPage = () => {
                     padding='xl'
                 >
                     <Text
+                        align='right'
                         mb='sm'
                         size='sm'
                         color='blue'
@@ -77,10 +79,16 @@ const ImportPage = () => {
                             Where do I get my Shakepay csv?
                     </a>
                 </Text>
+                {
+                    error.error && 
+                    <Alert icon={<FiXCircle size={16} />} title="Bummer!" color="red" mb='xl'>
+                        {error.message}
+                    </Alert>
+                }
                     <Dropzone
                         onDrop={onDrop}
-                        onReject={(files) => console.log('rejected files', files)}
-                        maxSize={3 * 1024 ** 2}
+                        onReject={(files) => setError({error: true, message: 'Not properly formatted csv file. Please, try again.'})}
+                        accept='.csv'
                         loading={pending}
                     >
                         {
