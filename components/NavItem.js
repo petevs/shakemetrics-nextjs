@@ -21,7 +21,8 @@ const NavItem= (props) => {
         backgroundColor: active ? (dark ? theme.colors.dark[6] : theme.colors.gray[0]) : 'none',
         ':hover': {
             backgroundColor: dark ? theme.colors.dark[6] : theme.colors.gray[0]
-        }
+        },
+        ...props.sx
     })
 
 
