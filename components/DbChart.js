@@ -1,6 +1,7 @@
 import { useMantineColorScheme } from '@mantine/core';
 import dynamic from 'next/dynamic';
 import { useMediaQuery } from '@mantine/hooks';
+import dayjs from 'dayjs';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -28,7 +29,12 @@ const DbChart = ({ categories, series }) => {
             },
             toolbar: {
                 show: false
-            }
+            },
+            events: {
+                // updated: function(chartContext, config) {
+                //     console.log(chartContext)
+                //   }
+            },
         },
         xaxis: {
             type: 'datetime',
