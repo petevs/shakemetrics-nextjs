@@ -42,9 +42,8 @@ const DashboardCards = ({left, sx}) => {
         <Box sx={cardSection}>
                         {
                             dashboardItems.map( (item, idx) => (
-                                <Link href={item.path} passHref key={item.id} >
+                                <Link href={item.path} passHref key={idx} >
                                     <Card
-                                        key={idx} 
                                         shadow="lg"
                                         radius='md' 
                                         padding="md"
