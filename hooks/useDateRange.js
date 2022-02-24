@@ -30,8 +30,6 @@ const useDateRange = () => {
         })
     },[snapshotList]) 
 
-    console.log(dateRanges)
-
     const handlePresetClick = ( preset ) => {
 
         dispatch(changeDateRange({

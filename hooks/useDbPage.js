@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../state/GlobalContext'
-import { dbPageContent } from '../lib/dbPageContent'
 import { convertDateToFriendly } from '../helpers/dateRanges'
 import { data } from '../lib/dummyData'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
+import { updateLastEntry } from '../helpers/updateLastEntry'
 
 const useDbPage = ( details, slug ) => {
 
@@ -49,14 +49,16 @@ const useDbPage = ( details, slug ) => {
     //GET SCORECARD DATA
 
     const { snapshotObj, snapshotList } = state.results.data || data
+    const { price } = state.marketData
 
     const startDate = convertDateToFriendly(dateRange[0])
     const endDate = convertDateToFriendly(dateRange[1])
 
     const lastIndex = snapshotList.length - 1
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
-    const lastEntry = snapshotObj[endDate] || snapshotList[lastIndex]
-
+    let lastEntry = updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex])
+    snapshotList.pop()
+    snapshotList.push(lastEntry)
 
     const formatValue = (val) => {
 
