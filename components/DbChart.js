@@ -4,10 +4,14 @@ import dynamic from 'next/dynamic';
 import { useMediaQuery } from '@mantine/hooks';
 import dayjs from 'dayjs';
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
+import { renderToString } from 'react-dom/server'
+import CustomTooltip from './CustomTooltip';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const DbChart = ({ categories, series, chartFormat }) => {
+
+    console.log(series)
 
     const [refreshing, setRefreshing] = useState(false)
 
@@ -35,6 +39,16 @@ const DbChart = ({ categories, series, chartFormat }) => {
 
         return Math.round(val)
     }
+
+
+    const tooltip = {
+        custom: function({series, seriesIndex, dataPointIndex, w}){
+            const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex]
+
+            return renderToString(<CustomTooltip {...data} formatVal={formatYAxis} />)
+        }
+    }
+
 
     const options = {
         theme: {
@@ -70,6 +84,9 @@ const DbChart = ({ categories, series, chartFormat }) => {
         },
         grid: {
             show: false
+        },
+        tooltip: {
+            ...tooltip,
         }
     }
 

@@ -173,11 +173,48 @@ const useDbPage = ( details, slug ) => {
         ]
 
         if(childKey){
-            series[0].data = trimmedSnapshots.map(item => item[familyKey][parentKey][childKey])
+            series[0].data = trimmedSnapshots.map((item, idx) => {
+
+                let previous = 0
+
+                if(idx > 0){
+                    previous = trimmedSnapshots[idx-1][familyKey][parentKey][childKey]
+                }
+
+                const current = item[familyKey][parentKey][childKey]
+                const change = current - previous
+                const percent = (change / previous * 100).toFixed(2)
+
+                return {
+                    x: item.date,
+                    y: current,
+                    change: change,
+                    percent: `(${percent}%)`
+                }
+                
+            })
+
             return series
         }
 
-        series[0].data = trimmedSnapshots.map(item => item[familyKey][parentKey])
+        series[0].data = trimmedSnapshots.map((item, idx) => {
+
+            let previous = 0
+            if(idx > 0){
+                previous = trimmedSnapshots[idx-1][familyKey][parentKey]
+            }
+
+            const current = item[familyKey][parentKey]
+            const change = current - previous
+            const percent = (change / previous * 100).toFixed(2)
+
+            return {
+                x: item.date,
+                y: current,
+                change: change,
+                percent: `(${percent}%)`
+            }
+        })
 
         return series
 
@@ -187,8 +224,6 @@ const useDbPage = ( details, slug ) => {
     const categories = trimmedSnapshots.map(item => item.date)
 
     const noActivity = series[0].data.every(item => item === 0)
-
-    console.log(snapshotList)
 
     return {
         demo,
