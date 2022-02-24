@@ -13,7 +13,7 @@ const FAQPage = () => {
       <BasicPageLayout
         title='Frequently Asked Questions'
         firstSection={
-          <Accordion>
+          <Accordion mb='md'>
           {
             frequentlyAskedQuestions.map( (item, idx) => (
               <Accordion.Item key={idx} label={item.q}>

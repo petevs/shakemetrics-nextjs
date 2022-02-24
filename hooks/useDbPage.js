@@ -71,17 +71,17 @@ const useDbPage = ( details, slug ) => {
 
         if(familyKey === 'performance'){ return toDollars(val)}
         if(familyKey === 'buySell'){
-            if(childKey === 'totalPurchased' || childKey === 'totalSold'){ return toBitcoin(val)}
+            if(childKey === 'totalPurchased' || childKey === 'totalSold'){ return toBitcoin(val, price)}
             return toDollars(val)
         }
 
         if(familyKey === 'shakingSats'){
-            if(parentKey === 'totalShakingSats'){ return toBitcoin(val)}
+            if(parentKey === 'totalShakingSats'){ return toBitcoin(val, price)}
             return toDollars(val)
         }
 
         if(familyKey === 'card'){
-            if(parentKey === 'totalCashBackBTC'){ return toBitcoin(val)}
+            if(parentKey === 'totalCashBackBTC'){ return toBitcoin(val, price)}
             return toDollars(val)
         }
 
@@ -89,20 +89,20 @@ const useDbPage = ( details, slug ) => {
             return (toDollars(val))
         }
 
-        if(parentKey === 'BTC'){ return toBitcoin(val)}
-        if(parentKey === 'ETH'){ return toBitcoin(val)}
+        if(parentKey === 'BTC'){ return toBitcoin(val, price)}
+        if(parentKey === 'ETH'){ return toBitcoin(val, price)}
         if(parentKey === 'CAD'){ return toDollars(val)}
         if(parentKey === 'ALL'){ return toDollars(val)}
 
-        return {text: val, raw: Math.round(val)}
+        return {text: val, raw: Math.round(val), type: null}
     }
 
     const getCurrentValue = () => {
         if(childKey){
-            return formatValue(lastEntry[familyKey][parentKey][childKey]).text
+            return formatValue(lastEntry[familyKey][parentKey][childKey], price)
         }
 
-        return formatValue(lastEntry[familyKey][parentKey]).text
+        return formatValue(lastEntry[familyKey][parentKey], price)
     }
 
     const getChange = () => {
@@ -147,10 +147,13 @@ const useDbPage = ( details, slug ) => {
 
     const [currentValue, setCurrentValue] = useState(getCurrentValue())
     const [change, setChange] = useState(getChange())
+    const [chartFormat, setChartFormat] = useState(getCurrentValue().type)
 
     useEffect(() => {
+
         setCurrentValue(getCurrentValue())
         setChange(getChange())
+        setChartFormat(getCurrentValue().type)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [parentKey, childKey, dateRange, lastEntry])
@@ -185,6 +188,8 @@ const useDbPage = ( details, slug ) => {
 
     const noActivity = series[0].data.every(item => item === 0)
 
+    console.log(snapshotList)
+
     return {
         demo,
         familyKey, setFamilyKey,
@@ -193,7 +198,7 @@ const useDbPage = ( details, slug ) => {
         noActivity,
         toggle, menu,
         dbToggleData, dbSelectData,
-        getTitle, endDate, currentValue, change,
+        getTitle, endDate, currentValue, change, chartFormat,
         series, categories
 
     }

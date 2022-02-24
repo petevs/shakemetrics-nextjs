@@ -1,5 +1,6 @@
-import { Text, Title, Group, ThemeIcon } from '@mantine/core'
+import { Text, Title, Group, ThemeIcon, Tooltip } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
+import { toBitcoin } from '../helpers/currencyFormatters'
 
 const DbScorecard = ({ title, val, change, isMobile }) => {
 
@@ -21,6 +22,7 @@ const DbScorecard = ({ title, val, change, isMobile }) => {
     }
 
 
+
   return (
     <>
             <Text 
@@ -29,12 +31,15 @@ const DbScorecard = ({ title, val, change, isMobile }) => {
             >
                 {title} 
             </Text>
-        <Title 
-            sx={{textAlign: isMobile ? 'center' : 'left'}} 
-            size='lg'
-        >
-            {val}
-        </Title>
+            <Title 
+                sx={{
+                    textAlign: isMobile ? 'center' : 'left',
+                    ':hover': {cursor: 'pointer'}
+                }} 
+                size='lg'
+            >
+                {val.text}
+            </Title>
         <Group 
             direction={isMobile ? 'column' : 'row'} 
             position={isMobile ? 'center' : 'left'} 

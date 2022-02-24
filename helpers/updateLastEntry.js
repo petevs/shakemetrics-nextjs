@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 const getPerformance = ( current, currency, price ) => {
     const netBalance = () => {
         return current.buySell[currency].totalPurchased - current.buySell[currency].totalSold
@@ -68,6 +70,7 @@ export const updateLastEntry = ( price, lastEntry ) => {
 
     let updatedEntry = {
         ...lastEntry,
+        date: dayjs().format('YYYY-MM-DD'),
         historicalPrice: {
             BTC: price.BTC,
             ETH: price.ETH
