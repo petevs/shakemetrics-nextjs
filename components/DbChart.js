@@ -51,24 +51,24 @@ const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHove
         }
     }
 
-    const mobileTooltip = () => {
-        if(isMobile){
-            return {
-                fixed: {
-                    enabled: true,
-                    position: 'topRight',
-                    offsetX: -30,
-                    offsetY: 30
-            }
-            }
-        }
+    // const mobileTooltip = () => {
+    //     if(isMobile){
+    //         return {
+    //             fixed: {
+    //                 enabled: true,
+    //                 position: 'topRight',
+    //                 offsetX: -30,
+    //                 offsetY: 30
+    //         }
+    //         }
+    //     }
 
-        return {
-            fixed: {
-                enabled: false
-            }
-        }
-    }
+    //     return {
+    //         fixed: {
+    //             enabled: false
+    //         }
+    //     }
+    // }
 
 
     const options = {
@@ -108,7 +108,6 @@ const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHove
         },
         tooltip: {
             ...tooltip,
-            ...mobileTooltip()
         }
     }
 
@@ -123,7 +122,7 @@ const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHove
                     options={options}
                     type='area'
                     width='100%'
-                    height='400px'
+                    height={isMobile ? '275px' : '400px'}
                 />
             }
         </>
