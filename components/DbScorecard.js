@@ -1,7 +1,7 @@
 import { Text, Title, Group, ThemeIcon, Tooltip, Menu, Select } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
-import { numberWithCommas, toDollars } from '../helpers/currencyFormatters'
-import { useState } from 'react'
+import { numberWithCommas, toDollars, toBitcoin } from '../helpers/currencyFormatters'
+import { useState, useEffect } from 'react'
 
 const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
 
@@ -25,6 +25,32 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
     }
 
     const [units, setUnits] = useState(format)
+    
+    const getUnitSelectData = () => {
+
+        if(format === 'CAD'){
+            return [
+                { value: 'CAD', label: 'CAD' },
+                { value: 'BTC', label: 'BTC' },
+                { value: 'SATS', label: 'SATS' },
+                { value: 'ETH', label: 'ETH' },
+            ]
+        }
+        if(format === 'BTC'){
+            return [
+                { value: 'BTC', label: 'BTC' },
+                { value: 'SATS', label: 'SATS' },
+                { value: 'CAD', label: 'CAD' },
+            ]
+        }
+
+        if(format === 'ETH'){
+            return [
+                { value: 'ETH', label: 'ETH' },
+                { value: 'CAD', label: 'CAD' },
+            ]
+        }
+    }
 
     const getValue = () => {
         if(format === 'BTC'){
@@ -38,10 +64,39 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                 return toDollars(val.raw * price['BTC']).text
             }
         }
+
+        if(format === 'ETH'){
+
+            if(units === 'CAD'){
+                return toDollars(val.raw * price['ETH']).text
+            }
+
+            return val.text
+        }
+
+        if(format === 'CAD'){
+            if(units === 'BTC'){
+                return toBitcoin(val.raw / price['BTC']).text 
+            }
+            if(units === 'SATS'){
+                const btc = val.raw / price['BTC']
+                const sats = Math.round(btc * 100000000)
+                return numberWithCommas(sats)
+            }
+            if(units === 'ETH'){
+                return toBitcoin(val.raw / price['ETH']).text 
+            }
+
+            return val.text
+        }
         
         return val.text
 
     }
+
+    useEffect(() => {
+        setUnits(format)
+    },[format])
 
   return (
     <>
@@ -66,18 +121,14 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                         {getValue()}
                     </Title>
                     {
-                        format === 'BTC' &&
+                        (format === 'BTC' || format === 'ETH' || format === 'CAD') &&
                         <Select
                             variant='unstyled'
                             size='sm'
                             sx={{width: '70px',}}
                             value={units}
                             onChange={setUnits}
-                            data={[
-                                { value: 'BTC', label: 'BTC' },
-                                { value: 'SATS', label: 'SATS' },
-                                { value: 'CAD', label: 'CAD' },
-                            ]}
+                            data={getUnitSelectData()}
                             />
                     }
                 </Group>

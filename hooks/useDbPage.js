@@ -93,7 +93,12 @@ const useDbPage = ( details, slug ) => {
         }
 
         if(parentKey === 'BTC'){ return toBitcoin(val, price)}
-        if(parentKey === 'ETH'){ return toBitcoin(val, price)}
+        if(parentKey === 'ETH'){ 
+            return {
+                ...toBitcoin(val, price),
+                type: 'ETH'
+            }
+        }
         if(parentKey === 'CAD'){ return toDollars(val)}
         if(parentKey === 'ALL'){ return toDollars(val)}
 
