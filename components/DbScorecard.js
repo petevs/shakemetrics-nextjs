@@ -109,14 +109,15 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                 <Group sx={{
                     alignItems: 'baseline', 
                     justifyContent: isMobile ? 'center' : 'start',
-                    marginLeft: isMobile ? '42.5px' : '0',
+                    marginLeft: isMobile ? '25px' : '0',
                     }} spacing='xs'>
                     <Title 
                         sx={{
+                            fontSize: isMobile ? '1.6rem' : '2.15rem',
                             textAlign: isMobile ? 'center' : 'left',
                             ':hover': {cursor: 'pointer'}
                         }} 
-                        size='lg'
+                        // size='lg'
                     >
                         {getValue()}
                     </Title>
@@ -125,7 +126,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                         <Select
                             variant='unstyled'
                             size='sm'
-                            sx={{width: '70px',}}
+                            sx={{width: '65px',}}
                             value={units}
                             onChange={setUnits}
                             data={getUnitSelectData()}
@@ -138,14 +139,16 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
             sx={{gap: '5px', paddingBottom: '2rem'}}
         >
                 <Group sx={{gap: '5px'}}>
-                    <ThemeIcon 
+                    <ThemeIcon
+                        size={isMobile ? 'sm' : 'md'}  
                         radius='xl' 
                         variant='light' 
                         color={getChangeColor()}
                     >
                         {getChangeIcon()}
                     </ThemeIcon>
-                    <Text 
+                    <Text
+                        size={isMobile ? 'sm' : 'md'} 
                         weight={700} 
                         color={getChangeColor()}
                     >
@@ -154,7 +157,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                 </Group>
             <Text 
                 color='dimmed' 
-                size='sm'
+                size={isMobile ? 'xs' : 'sm'}
             >
                 in selected period
             </Text>
