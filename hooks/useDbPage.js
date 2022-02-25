@@ -159,7 +159,7 @@ const useDbPage = ( details, slug ) => {
         setChartFormat(getCurrentValue().type)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [parentKey, childKey, dateRange, lastEntry])
+    }, [familyKey, parentKey, childKey, dateRange, lastEntry])
 
     
     //GET CHART DATA
