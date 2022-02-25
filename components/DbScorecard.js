@@ -2,10 +2,24 @@ import { Text, Title, Group, ThemeIcon, Tooltip, Menu, Select } from '@mantine/c
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
 import { numberWithCommas, toDollars, toBitcoin } from '../helpers/currencyFormatters'
 import { useState, useEffect } from 'react'
+import { useMediaQuery } from '@mantine/hooks'
 
 const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
 
     console.log(format)
+
+    const extraSmall = useMediaQuery('(max-width: 380px)');
+
+    const valueFontSize = () => {
+        if(extraSmall){
+            return '1.5rem'
+        }
+        if(isMobile){
+            return '1.8rem'
+        }
+        return '2.15rem'
+    }
+
 
     const getChangeColor = () => {
         if(!change.raw){return 'gray'}
@@ -113,7 +127,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                     }} spacing='xs'>
                     <Title 
                         sx={{
-                            fontSize: isMobile ? '1.6rem' : '2.15rem',
+                            fontSize: valueFontSize(),
                             textAlign: isMobile ? 'center' : 'left',
                             ':hover': {cursor: 'pointer'}
                         }} 
