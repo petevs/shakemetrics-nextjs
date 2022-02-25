@@ -1,7 +1,5 @@
 export const toBitcoin = (num, price) => {
 
-    console.log(price)
-
     if(num === 0 ){ 
         return {
             text: '0.0000000',

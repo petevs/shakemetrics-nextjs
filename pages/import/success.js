@@ -15,10 +15,10 @@ const ImportSuccess = () => {
             </Head>
             <DashboardShell>
                 <Title color='dimmed' size='xl' weight={700} mb='xl'>
-                    Success
+                    All set! What would you like to see first?
                 </Title>
                 <Text color='dimmed'>
-                    Right on! Your data has been successfuly imported. What do you want to see first?
+                    Your data has been successfuly imported. Click a card below to head to see you report.
                 </Text>
                 <DashboardCards left={true} />
 

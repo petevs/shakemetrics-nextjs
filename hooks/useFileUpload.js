@@ -40,24 +40,23 @@ const useFileUpload = () => {
         setUrl(downloadURL)
         try {
             const result = await parseData({ url: downloadURL})
-            console.log(result)
+            // console.log(result)
             setPending(false)
             setSuccess(true)
             dispatch(setResults(result))
             dispatch(toggleDemo(false))
             router.push('/import/success')
-            // deleteObject(fileRef)
+            deleteObject(fileRef)
         }
         catch(err){
             setPending(false)
             setError({
                 error: true,
-                message: err.message
-                // message: "The csv file uploaded is not an unaltered Shakepay transaction csv file. Please, try again and make sure it is the original file. If the error persists and you think there is an issue please contact support at hello@shakemetrics.com."
+                // message: err.message
+                message: "The csv file uploaded is not an unaltered Shakepay transaction csv file. Please, try again and make sure it is the original file. If the error persists and you think there is an issue please contact support at hello@shakemetrics.com."
             })
-            // deleteObject(fileRef)
+            deleteObject(fileRef)
         }
-        // console.log(result)
 
 
     }

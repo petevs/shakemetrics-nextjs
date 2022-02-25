@@ -71,12 +71,6 @@ const DbPage = (props) => {
         series, categories
     } = useDbPage(details, slug)
 
-    const [chartHoverItem, setChartHoverItem] = useState(null)
-
-    useEffect(() => {
-        console.log(chartHoverItem)
-    },[chartHoverItem])
-
     return(
         <>
             <Head>
@@ -122,14 +116,11 @@ const DbPage = (props) => {
                                 val={currentValue}
                                 change={change}
                                 isMobile={isMobile}
-                                chartHoverItem={chartHoverItem}
                             />
                             <DbChart 
                                 categories={categories}
                                 series={series}
                                 chartFormat={chartFormat}
-                                setChartHoverItem={setChartHoverItem}
-                                chartHoverItem={chartHoverItem}
                             />
                         </>
                     }

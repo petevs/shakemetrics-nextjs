@@ -9,9 +9,7 @@ import CustomTooltip from './CustomTooltip';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHoverItem }) => {
-
-    console.log(series)
+const DbChart = ({ categories, series, chartFormat }) => {
 
     const [refreshing, setRefreshing] = useState(false)
 

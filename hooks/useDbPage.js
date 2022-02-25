@@ -56,15 +56,15 @@ const useDbPage = ( details, slug ) => {
 
     const lastIndex = snapshotList.length - 1
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
-    const [lastEntry, setLastEntry] = useState(updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex]))
+    const last = snapshotObj[endDate] || snapshotList[lastIndex]
+
+    const [lastEntry, setLastEntry] = useState(updateLastEntry(price, last, endDate))
     snapshotList.pop()
-    if(snapshotList[lastIndex - 1].date === lastEntry.date){
-        snapshotList.pop()
-    }
     snapshotList.push(lastEntry)
 
     useEffect(() => {
-        const newEntry = updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex])
+        const previousEntry = snapshotObj[endDate] || snapshotList[lastIndex]
+        const newEntry = updateLastEntry(price, previousEntry, endDate)
         setLastEntry(newEntry)
         snapshotList.pop()
         snapshotList.push(newEntry)
