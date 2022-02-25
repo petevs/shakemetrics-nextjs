@@ -9,7 +9,7 @@ import CustomTooltip from './CustomTooltip';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const DbChart = ({ categories, series, chartFormat }) => {
+const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHoverItem }) => {
 
     console.log(series)
 
@@ -44,8 +44,29 @@ const DbChart = ({ categories, series, chartFormat }) => {
     const tooltip = {
         custom: function({series, seriesIndex, dataPointIndex, w}){
             const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex]
-
+            // if(data.y !== chartHoverItem){
+            //     setChartHoverItem({...data})
+            // }
             return renderToString(<CustomTooltip {...data} formatVal={formatYAxis} />)
+        }
+    }
+
+    const mobileTooltip = () => {
+        if(isMobile){
+            return {
+                fixed: {
+                    enabled: true,
+                    position: 'topRight',
+                    offsetX: -30,
+                    offsetY: 30
+            }
+            }
+        }
+
+        return {
+            fixed: {
+                enabled: false
+            }
         }
     }
 
@@ -67,9 +88,9 @@ const DbChart = ({ categories, series, chartFormat }) => {
                 show: false
             },
             events: {
-                // updated: function(chartContext, config) {
-                //     console.log(chartContext)
-                //   }
+                mouseLeave: function(event, chartContext, config) {
+                    setChartHoverItem(null)
+                  }
             },
         },
         xaxis: {
@@ -87,6 +108,7 @@ const DbChart = ({ categories, series, chartFormat }) => {
         },
         tooltip: {
             ...tooltip,
+            ...mobileTooltip()
         }
     }
 

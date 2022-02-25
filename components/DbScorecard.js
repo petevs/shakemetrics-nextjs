@@ -2,7 +2,7 @@ import { Text, Title, Group, ThemeIcon, Tooltip } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
 import { toBitcoin } from '../helpers/currencyFormatters'
 
-const DbScorecard = ({ title, val, change, isMobile }) => {
+const DbScorecard = ({ title, val, change, isMobile, chartHoverItem }) => {
 
     const getChangeColor = () => {
         if(!change.raw){return 'gray'}
@@ -38,7 +38,7 @@ const DbScorecard = ({ title, val, change, isMobile }) => {
                 }} 
                 size='lg'
             >
-                {val.text}
+                {chartHoverItem ? chartHoverItem.y : val.text}
             </Title>
         <Group 
             direction={isMobile ? 'column' : 'row'} 

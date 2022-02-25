@@ -1,6 +1,7 @@
 //NEXT
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 //MANTINE
 import { Paper, Text, useMantineColorScheme } from '@mantine/core'
@@ -70,6 +71,12 @@ const DbPage = (props) => {
         series, categories
     } = useDbPage(details, slug)
 
+    const [chartHoverItem, setChartHoverItem] = useState(null)
+
+    useEffect(() => {
+        console.log(chartHoverItem)
+    },[chartHoverItem])
+
     return(
         <>
             <Head>
@@ -115,11 +122,14 @@ const DbPage = (props) => {
                                 val={currentValue}
                                 change={change}
                                 isMobile={isMobile}
+                                chartHoverItem={chartHoverItem}
                             />
                             <DbChart 
                                 categories={categories}
                                 series={series}
                                 chartFormat={chartFormat}
+                                setChartHoverItem={setChartHoverItem}
+                                chartHoverItem={chartHoverItem}
                             />
                         </>
                     }
