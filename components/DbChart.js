@@ -86,9 +86,9 @@ const DbChart = ({ categories, series, chartFormat }) => {
                 show: false
             },
             events: {
-                mouseLeave: function(event, chartContext, config) {
-                    setChartHoverItem(null)
-                  }
+                // mouseLeave: function(event, chartContext, config) {
+                //     setChartHoverItem(null)
+                //   }
             },
         },
         xaxis: {

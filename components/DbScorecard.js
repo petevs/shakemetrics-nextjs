@@ -1,8 +1,8 @@
-import { Text, Title, Group, ThemeIcon, Tooltip } from '@mantine/core'
+import { Text, Title, Group, ThemeIcon, Tooltip, Menu, Select } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
 import { toBitcoin } from '../helpers/currencyFormatters'
 
-const DbScorecard = ({ title, val, change, isMobile, chartHoverItem }) => {
+const DbScorecard = ({ title, val, change, isMobile, }) => {
 
     const getChangeColor = () => {
         if(!change.raw){return 'gray'}
@@ -31,15 +31,32 @@ const DbScorecard = ({ title, val, change, isMobile, chartHoverItem }) => {
             >
                 {title} 
             </Text>
-            <Title 
-                sx={{
-                    textAlign: isMobile ? 'center' : 'left',
-                    ':hover': {cursor: 'pointer'}
-                }} 
-                size='lg'
-            >
-                {chartHoverItem ? chartHoverItem.y : val.text}
-            </Title>
+                <Group sx={{
+                    alignItems: 'baseline', 
+                    justifyContent: isMobile ? 'center' : 'start',
+                    marginLeft: isMobile ? '42.5px' : '0',
+                    }} spacing='xs'>
+                    <Title 
+                        sx={{
+                            textAlign: isMobile ? 'center' : 'left',
+                            ':hover': {cursor: 'pointer'}
+                        }} 
+                        size='lg'
+                    >
+                        {val.text}
+                    </Title>
+                    <Select
+                        variant='unstyled'
+                        size='sm'
+                        placeholder='Bitcoin'
+                        sx={{width: '70px',}}
+                        data={[
+                            { value: 'BTC', label: 'BTC' },
+                            { value: 'SATS', label: 'SATS' },
+                            { value: 'CAD', label: 'CAD' },
+                        ]}
+                        />
+                </Group>
         <Group 
             direction={isMobile ? 'column' : 'row'} 
             position={isMobile ? 'center' : 'left'} 
