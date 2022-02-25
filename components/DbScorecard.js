@@ -1,8 +1,11 @@
 import { Text, Title, Group, ThemeIcon, Tooltip, Menu, Select } from '@mantine/core'
 import { IoArrowUp, IoArrowDown, IoArrowForward } from 'react-icons/io5'
-import { toBitcoin } from '../helpers/currencyFormatters'
+import { numberWithCommas, toDollars } from '../helpers/currencyFormatters'
+import { useState } from 'react'
 
-const DbScorecard = ({ title, val, change, isMobile, }) => {
+const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
+
+    console.log(format)
 
     const getChangeColor = () => {
         if(!change.raw){return 'gray'}
@@ -21,7 +24,24 @@ const DbScorecard = ({ title, val, change, isMobile, }) => {
         return <IoArrowDown />
     }
 
+    const [units, setUnits] = useState(format)
 
+    const getValue = () => {
+        if(format === 'BTC'){
+
+            if(units === 'SATS'){
+                const sats = Math.round(val.raw * 100000000)
+                return numberWithCommas(sats)
+            }
+    
+            if(units === 'CAD'){
+                return toDollars(val.raw * price['BTC']).text
+            }
+        }
+        
+        return val.text
+
+    }
 
   return (
     <>
@@ -43,19 +63,23 @@ const DbScorecard = ({ title, val, change, isMobile, }) => {
                         }} 
                         size='lg'
                     >
-                        {val.text}
+                        {getValue()}
                     </Title>
-                    <Select
-                        variant='unstyled'
-                        size='sm'
-                        placeholder='Bitcoin'
-                        sx={{width: '70px',}}
-                        data={[
-                            { value: 'BTC', label: 'BTC' },
-                            { value: 'SATS', label: 'SATS' },
-                            { value: 'CAD', label: 'CAD' },
-                        ]}
-                        />
+                    {
+                        format === 'BTC' &&
+                        <Select
+                            variant='unstyled'
+                            size='sm'
+                            sx={{width: '70px',}}
+                            value={units}
+                            onChange={setUnits}
+                            data={[
+                                { value: 'BTC', label: 'BTC' },
+                                { value: 'SATS', label: 'SATS' },
+                                { value: 'CAD', label: 'CAD' },
+                            ]}
+                            />
+                    }
                 </Group>
         <Group 
             direction={isMobile ? 'column' : 'row'} 

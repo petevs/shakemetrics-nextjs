@@ -237,7 +237,8 @@ const useDbPage = ( details, slug ) => {
         toggle, menu,
         dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change, chartFormat,
-        series, categories
+        series, categories,
+        price
 
     }
 }

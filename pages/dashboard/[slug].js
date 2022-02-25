@@ -68,7 +68,8 @@ const DbPage = (props) => {
         toggle, menu,
         dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change, chartFormat,
-        series, categories
+        series, categories,
+        price
     } = useDbPage(details, slug)
 
     return(
@@ -116,6 +117,8 @@ const DbPage = (props) => {
                                 val={currentValue}
                                 change={change}
                                 isMobile={isMobile}
+                                format={chartFormat}
+                                price={price}
                             />
                             <DbChart 
                                 categories={categories}
