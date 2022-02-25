@@ -58,6 +58,9 @@ const useDbPage = ( details, slug ) => {
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
     const [lastEntry, setLastEntry] = useState(updateLastEntry(price, snapshotObj[endDate] || snapshotList[lastIndex]))
     snapshotList.pop()
+    if(snapshotList[lastIndex - 1].date === lastEntry.date){
+        snapshotList.pop()
+    }
     snapshotList.push(lastEntry)
 
     useEffect(() => {
@@ -188,8 +191,8 @@ const useDbPage = ( details, slug ) => {
                 return {
                     x: item.date,
                     y: current,
-                    change: change,
-                    percent: `(${percent}%)`
+                    change: change === current ? 'initial' : change,
+                    percent: change === current ? 'initial' : `(${percent}%)`
                 }
                 
             })
@@ -211,8 +214,8 @@ const useDbPage = ( details, slug ) => {
             return {
                 x: item.date,
                 y: current,
-                change: change,
-                percent: `(${percent}%)`
+                change: change === current ? 'initial' : change,
+                percent: change === current ? 'initial' : `(${percent}%)`
             }
         })
 

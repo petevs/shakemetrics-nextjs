@@ -117,7 +117,7 @@ const DbChart = ({ categories, series, chartFormat, setChartHoverItem, chartHove
                 refreshing 
                 ? <Box sx={{height: '400px'}}></Box>
                 : <Chart
-                    style={{margin: isMobile ? '-2.25rem': 'inherit'}}
+                    style={{margin: isMobile ? '-2.2rem': 'inherit'}}
                     series={series}
                     options={options}
                     type='area'

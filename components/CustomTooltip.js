@@ -13,18 +13,19 @@ const CustomTooltip = (props) => {
     } = props
 
     const getChangeColor = () => {
-        if(!change){return 'gray'}
+        if(!change || change === 'initial'){return 'gray'}
         if(change > 0){return 'green'}
         return 'red'
     }
 
     const getChangeText = () => {
+        if(change === 'initial'){ return 'Initial '}
         if(!change){ return 'No Change'}
         return `${formatVal(change)} ${percent}`
     }
 
     const getChangeIcon = () => {
-        if(!change){return <IoArrowForward />}
+        if(!change || change === 'initial'){return <IoArrowForward />}
         if(change > 0){return <IoArrowUp />}
         return <IoArrowDown />
     }
