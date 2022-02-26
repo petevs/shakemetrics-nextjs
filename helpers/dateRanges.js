@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { data } from '../lib/dummyData'
 
-
 const getDateRange = ( startSubtract, startUnits, endSubtract = 0, endUnits = 'days' ) => {
     const startDate = dayjs().subtract(startSubtract, startUnits).toDate()
     const endDate = dayjs().subtract(endSubtract, endUnits).toDate()

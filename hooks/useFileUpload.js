@@ -5,7 +5,12 @@ import { httpsCallable } from 'firebase/functions'
 import { GlobalContext } from '../state/GlobalContext'
 import { setResults, toggleDemo } from '../state/appReducer'
 import { useRouter } from 'next/router'
+import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
 
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const useFileUpload = () => {
 
@@ -39,8 +44,7 @@ const useFileUpload = () => {
         const downloadURL = await getDownloadURL(fileRef)
         setUrl(downloadURL)
         try {
-            const result = await parseData({ url: downloadURL})
-            // console.log(result)
+            const result = await parseData({ url: downloadURL, timezone: dayjs.tz.guess()})
             setPending(false)
             setSuccess(true)
             dispatch(setResults(result))

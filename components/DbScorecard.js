@@ -6,8 +6,6 @@ import { useMediaQuery } from '@mantine/hooks'
 
 const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
 
-    console.log(format)
-
     const extraSmall = useMediaQuery('(max-width: 380px)');
 
     const valueFontSize = () => {
