@@ -1,4 +1,6 @@
-import { dateRanges } from "../helpers/dateRanges"
+import { dateRanges, convertDateToFriendly } from "../helpers/dateRanges"
+import { updateLastEntry } from "../helpers/updateLastEntry"
+import { data } from '../lib/dummyData'
 
 
 const FETCHING_MARKET_DATA_SUCCESS = "FETCHING_MARKET_DATA_SUCCESS"
@@ -25,7 +27,50 @@ export const initialAppState = {
             BTC: 0
         }
     },
-    results: {},
+    results: {...data},
+    currentEntry: function(){
+        const { snapshotObj, snapshotList } = this.results
+        const endDate = convertDateToFriendly(this.dateRange[1])
+
+        //If the end date not in snapshotObj create a new one with last available
+        if(!(endDate in snapshotObj)){
+            const lastIndex = snapshotList.length - 1
+            const lastAvailable = snapshotList[lastIndex]
+
+            return {
+                ...lastAvailable,
+                date: endDate,
+                index: lastIndex + 2,
+                ...updateLastEntry(this.marketData.price, lastAvailable),
+            }
+        }
+        return {
+            ...snapshotObj[endDate],
+
+        }
+    },
+    snapshots: function(){
+        const { snapshotObj, snapshotList } = this.results
+
+        const lastIndex = snapshotList.length - 1
+        const startDate = convertDateToFriendly(this.dateRange[0])
+        const endDate = convertDateToFriendly(this.dateRange[1])
+        const firstEntry = snapshotObj[startDate] || snapshotList[0]
+        const lastEntry = snapshotObj[endDate] || snapshotList[lastIndex]
+
+        const startIndex = firstEntry.index - 1
+        const endIndex = lastEntry.index
+
+        const snapshotCopy = [...snapshotList]
+        
+        // if(snapshotCopy[snapshotCopy.length - 1].date === this.currentEntry().date){
+        //     snapshotCopy.pop()
+        // }
+
+        snapshotCopy.push(this.currentEntry())
+        
+        return snapshotCopy.slice(startIndex, endIndex + 1)
+    },
     demo: true
 }
 

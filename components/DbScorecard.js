@@ -138,7 +138,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                         <Select
                             variant='unstyled'
                             size='sm'
-                            sx={{width: '65px',}}
+                            sx={{width: '70px',}}
                             value={units}
                             onChange={setUnits}
                             data={getUnitSelectData()}

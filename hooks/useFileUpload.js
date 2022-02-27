@@ -26,7 +26,7 @@ const useFileUpload = () => {
     })
     const [success, setSuccess] = useState(false)
 
-    const { dispatch } = useContext(GlobalContext)
+    const { state, dispatch } = useContext(GlobalContext)
 
     const parseData = httpsCallable(functions, 'parseShakepay')
 
@@ -45,9 +45,11 @@ const useFileUpload = () => {
         setUrl(downloadURL)
         try {
             const result = await parseData({ url: downloadURL, timezone: dayjs.tz.guess()})
+            // console.log(result)
             setPending(false)
             setSuccess(true)
-            dispatch(setResults(result))
+            dispatch(setResults(result.data))
+            console.log(result.data)
             dispatch(toggleDemo(false))
             router.push('/import/success')
             deleteObject(fileRef)

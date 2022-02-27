@@ -1,9 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../state/GlobalContext'
 import { convertDateToFriendly } from '../helpers/dateRanges'
-import { data } from '../lib/dummyData'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
-import { updateLastEntry } from '../helpers/updateLastEntry'
 
 const useDbPage = ( details, slug ) => {
 
@@ -48,27 +46,14 @@ const useDbPage = ( details, slug ) => {
 
     //GET SCORECARD DATA
 
-    const { snapshotObj, snapshotList } = state.results.data || data
+    const { snapshotObj, snapshotList } = state.results
     const { price } = state.marketData
 
     const startDate = convertDateToFriendly(dateRange[0])
     const endDate = convertDateToFriendly(dateRange[1])
 
-    const lastIndex = snapshotList.length - 1
     const firstEntry = snapshotObj[startDate] || snapshotList[0]
-    const last = snapshotObj[endDate] || snapshotList[lastIndex]
-
-    const [lastEntry, setLastEntry] = useState(updateLastEntry(price, last, endDate))
-    snapshotList.pop()
-    snapshotList.push(lastEntry)
-
-    useEffect(() => {
-        const previousEntry = snapshotObj[endDate] || snapshotList[lastIndex]
-        const newEntry = updateLastEntry(price, previousEntry, endDate)
-        setLastEntry(newEntry)
-        snapshotList.pop()
-        snapshotList.push(newEntry)
-    }, [price, snapshotObj, endDate, snapshotList, lastIndex])
+    const lastEntry = state.currentEntry()
 
     const formatValue = (val) => {
 
@@ -153,23 +138,20 @@ const useDbPage = ( details, slug ) => {
         }
     }
 
-    const [currentValue, setCurrentValue] = useState(getCurrentValue())
-    const [change, setChange] = useState(getChange())
-    const [chartFormat, setChartFormat] = useState(getCurrentValue().type)
+    // const [currentValue, setCurrentValue] = useState(getCurrentValue())
+
+    const currentValue = getCurrentValue()
+    const change = getChange()
+    const [chartFormat, setChartFormat] = useState(currentValue.type)
+
 
     useEffect(() => {
+        setChartFormat(currentValue.type)
+    },[currentValue, familyKey, parentKey, childKey, dateRange])
 
-        setCurrentValue(getCurrentValue())
-        setChange(getChange())
-        setChartFormat(getCurrentValue().type)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [familyKey, parentKey, childKey, dateRange, lastEntry])
-
-    
     //GET CHART DATA
 
-    const trimmedSnapshots = snapshotList.slice(firstEntry.index - 1, lastEntry.index + 1)
+    const trimmedSnapshots = state.snapshots()
 
     const getSeries = () => {
 

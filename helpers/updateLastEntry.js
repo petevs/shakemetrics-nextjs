@@ -64,11 +64,9 @@ const getPerformance = ( current, currency, price ) => {
 
 
 
-export const updateLastEntry = ( price, lastEntry, endDate ) => {
+export const updateLastEntry = ( price, lastEntry ) => {
 
-    let updatedEntry = {
-        ...lastEntry,
-        date: endDate || lastEntry.date,
+    let updates = {
         historicalPrice: {
             BTC: Number(price.BTC),
             ETH: Number(price.ETH)
@@ -80,12 +78,12 @@ export const updateLastEntry = ( price, lastEntry, endDate ) => {
         }
     }
 
-    const { performance } = updatedEntry
+    const { performance } = updates
 
     return {
-        ...updatedEntry,
+        ...updates,
         performance: {
-            ...updatedEntry.performance,
+            ...updates.performance,
             ALL: {
                 value: performance.BTC.value + performance.ETH.value,
                 unrealizedGain: performance.BTC.unrealizedGain + performance.ETH.unrealizedGain,
