@@ -45,7 +45,6 @@ const useFileUpload = () => {
         setUrl(downloadURL)
         try {
             const result = await parseData({ url: downloadURL, timezone: dayjs.tz.guess()})
-            // console.log(result)
             setPending(false)
             setSuccess(true)
             dispatch(setResults(result))

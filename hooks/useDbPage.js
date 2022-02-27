@@ -59,29 +59,16 @@ const useDbPage = ( details, slug ) => {
     const last = snapshotObj[endDate] || snapshotList[lastIndex]
 
     const [lastEntry, setLastEntry] = useState(updateLastEntry(price, last, endDate))
-
-    if(last.date === lastEntry.date){
-        snapshotList.pop()
-        snapshotList.push({...lastEntry})
-    }
-
-    if(last.date !== lastEntry.date){
-        snapshotList.push({...lastEntry})
-    }
+    snapshotList.pop()
+    snapshotList.push(lastEntry)
 
     useEffect(() => {
         const previousEntry = snapshotObj[endDate] || snapshotList[lastIndex]
         const newEntry = updateLastEntry(price, previousEntry, endDate)
         setLastEntry(newEntry)
-        if(previousEntry.date === newEntry.date){
-            snapshotList.pop()
-            snapshotList.push({...newEntry})
-        }
-    
-        if(previousEntry.date !== newEntry.date){
-            snapshotList.push({...newEntry})
-        }
-    }, [price, snapshotObj, snapshotList, endDate, lastIndex])
+        snapshotList.pop()
+        snapshotList.push(newEntry)
+    }, [price, snapshotObj, endDate, snapshotList, lastIndex])
 
     const formatValue = (val) => {
 
