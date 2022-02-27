@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import { dateRanges, convertDateToFriendly } from "../helpers/dateRanges"
 import { updateLastEntry } from "../helpers/updateLastEntry"
 import { data } from '../lib/dummyData'
@@ -32,22 +33,23 @@ export const initialAppState = {
         const { snapshotObj, snapshotList } = this.results
         const endDate = convertDateToFriendly(this.dateRange[1])
 
-        //If the end date not in snapshotObj create a new one with last available
+        const lastIndex = snapshotList.length - 1
+
         if(!(endDate in snapshotObj)){
-            const lastIndex = snapshotList.length - 1
-            const lastAvailable = snapshotList[lastIndex]
 
             return {
-                ...lastAvailable,
+                ...snapshotList[lastIndex],
                 date: endDate,
                 index: lastIndex + 2,
-                ...updateLastEntry(this.marketData.price, lastAvailable),
+                ...updateLastEntry(this.marketData.price, snapshotList[lastIndex]),
             }
         }
-        return {
-            ...snapshotObj[endDate],
 
+        return {
+            ...snapshotObj[endDate]
         }
+
+
     },
     snapshots: function(){
         const { snapshotObj, snapshotList } = this.results
@@ -62,12 +64,12 @@ export const initialAppState = {
         const endIndex = lastEntry.index
 
         const snapshotCopy = [...snapshotList]
-        
-        // if(snapshotCopy[snapshotCopy.length - 1].date === this.currentEntry().date){
-        //     snapshotCopy.pop()
-        // }
 
         snapshotCopy.push(this.currentEntry())
+
+        if(endDate !== dayjs().format('YYYY-MM-DD')){
+            return snapshotCopy.slice(startIndex, endIndex)
+        }
         
         return snapshotCopy.slice(startIndex, endIndex + 1)
     },

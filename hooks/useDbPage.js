@@ -144,6 +144,7 @@ const useDbPage = ( details, slug ) => {
     const change = getChange()
     const [chartFormat, setChartFormat] = useState(currentValue.type)
 
+    // console.log(getCurrentValue())
 
     useEffect(() => {
         setChartFormat(currentValue.type)

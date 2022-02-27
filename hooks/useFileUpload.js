@@ -49,7 +49,7 @@ const useFileUpload = () => {
             setPending(false)
             setSuccess(true)
             dispatch(setResults(result.data))
-            console.log(result.data)
+            // console.log(result.data)
             dispatch(toggleDemo(false))
             router.push('/import/success')
             deleteObject(fileRef)
