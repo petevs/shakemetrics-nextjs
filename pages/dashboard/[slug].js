@@ -2,9 +2,10 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 //MANTINE
-import { Paper, Text, useMantineColorScheme } from '@mantine/core'
+import { Paper, useMantineColorScheme } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 //Library
@@ -24,6 +25,7 @@ import DbSelect from '../../components/DbSelect'
 import DbScorecard from '../../components/DbScorecard'
 import DbChart from '../../components/DbChart'
 import DemoNotification from '../../components/DemoNotification'
+
 
 export async function getStaticPaths(){
     

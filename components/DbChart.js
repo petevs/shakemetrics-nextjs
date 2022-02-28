@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
-import { Box, useMantineColorScheme } from '@mantine/core';
+import { Box, Button, useMantineColorScheme } from '@mantine/core';
 import dynamic from 'next/dynamic';
 import { useMediaQuery } from '@mantine/hooks';
 import dayjs from 'dayjs';
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
 import { renderToString } from 'react-dom/server'
 import CustomTooltip from './CustomTooltip';
+import useGetMockData from '../hooks/useGetMockData'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const DbChart = ({ categories, series, chartFormat }) => {
 
     const [refreshing, setRefreshing] = useState(false)
+    const { getMockData } = useGetMockData()
 
     useEffect(() => {
 
@@ -123,6 +125,7 @@ const DbChart = ({ categories, series, chartFormat }) => {
                     height={isMobile ? '275px' : '400px'}
                 />
             }
+            <Button onClick={() => getMockData()}>Get Mock Data</Button>
         </>
     )
 }

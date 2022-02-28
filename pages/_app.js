@@ -3,27 +3,18 @@ import { GlobalProvider } from '../state/GlobalContext'
 import { useEffect, useState } from 'react'
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebase'
+import useAuth from '../hooks/useAuth';
 
 function MyApp({ Component, pageProps }) {
 
   const [colorScheme, setColorScheme] = useState('light');
   const toggleColorScheme = (value) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
 
-    // useEffect(() => {
+    const { continueAsGuest } = useAuth()
 
-    //   const makeMockData = httpsCallable(functions, 'makeMockData')
-
-    //   const getDummyData = async () => {
-
-    //     const result = await makeMockData({ message: 'test' })
-    //     console.log(result)
-    //   }
-
-    //   getDummyData()
-
-    // },[])
+    continueAsGuest()
 
   return (  
     <GlobalProvider>

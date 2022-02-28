@@ -29,7 +29,7 @@ export default function Home() {
       </Head>
 
       <DashboardShell noNav={true}>
-        <h1 style={{textAlign: 'center', paddingTop: '4rem'}}>Coming Soon...</h1>
+        <h2>Coming soon...</h2>
         {/* <Group direction='column' position='center' sx={{textAlign: 'center'}} spacing={0}>
           <Text>Free Shakepay Extension</Text>
           <Text 
