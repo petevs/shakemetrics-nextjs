@@ -45,8 +45,17 @@ export const initialAppState = {
             }
         }
 
+        if(endDate in snapshotObj && endDate === dayjs().format('YYYY-MM-DD')){
+            return {
+                ...snapshotList[lastIndex],
+                date: endDate,
+                ...updateLastEntry(this.marketData.price, snapshotList[lastIndex])
+            }
+        }
+
         return {
-            ...snapshotObj[endDate]
+            ...snapshotObj[endDate],
+            date: endDate,
         }
 
 
@@ -64,6 +73,10 @@ export const initialAppState = {
         const endIndex = lastEntry.index
 
         const snapshotCopy = [...snapshotList]
+
+        if(snapshotCopy[snapshotCopy.length -1].date === dayjs().format('YYYY-MM-DD')){
+            snapshotCopy.pop()
+        }
 
         snapshotCopy.push(this.currentEntry())
 
