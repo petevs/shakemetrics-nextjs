@@ -29,8 +29,7 @@ export default function Home() {
       </Head>
 
       <DashboardShell noNav={true}>
-        <h2>Coming soon...</h2>
-        {/* <Group direction='column' position='center' sx={{textAlign: 'center'}} spacing={0}>
+        <Group direction='column' position='center' sx={{textAlign: 'center'}} spacing={0}>
           <Text>Free Shakepay Extension</Text>
           <Text 
             sx={headlineStyle} 
@@ -77,7 +76,7 @@ export default function Home() {
           <Box sx={{maxWidth: '750px'}}>
             <DashboardCards sx={{gridTemplateColumns: '1fr 1fr'}}/>
           </Box>
-        </Group> */}
+        </Group>
       </DashboardShell>
 
     </div>

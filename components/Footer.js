@@ -31,7 +31,9 @@ const Footer = () => {
                 <Link href='/terms'>Terms</Link>
                 <Link href='/contact'>Contact</Link>
                 </Group>
+                <Text align='center' size='sm'>*ShakeMetrics.com is not affiliated with Shakepay.com and makes no representation to be. This site is provided as a third party extension.</Text>
             </Text>
+  
         </Box>
     )
 }
