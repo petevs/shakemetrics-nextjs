@@ -154,8 +154,6 @@ const useDbPage = ( details, slug ) => {
 
     const trimmedSnapshots = state.snapshots()
 
-    console.log(trimmedSnapshots)
-
     const getSeries = () => {
 
         const series = [
