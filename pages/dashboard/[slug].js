@@ -121,6 +121,7 @@ const DbPage = (props) => {
                                 isMobile={isMobile}
                                 format={chartFormat}
                                 price={price}
+                                familyKey={familyKey}
                             />
                             <DbChart 
                                 categories={categories}

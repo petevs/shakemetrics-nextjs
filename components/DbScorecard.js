@@ -4,7 +4,8 @@ import { numberWithCommas, toDollars, toBitcoin } from '../helpers/currencyForma
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 
-const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
+const DbScorecard = ({ title, val, change, isMobile, format, price, familyKey }) => {
+
 
     const extraSmall = useMediaQuery('(max-width: 380px)');
 
@@ -110,6 +111,28 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
         setUnits(format)
     },[format])
 
+    const CurrencySelect = () => {
+
+        if((familyKey === 'buySell')){
+            return(<></>)
+        }
+
+        if(format === 'BTC' || format === 'ETH' || format === 'CAD'){
+            return(
+                <Select
+                    variant='unstyled'
+                    size='sm'
+                    sx={{width: '70px',}}
+                    value={units}
+                    onChange={setUnits}
+                    data={getUnitSelectData()}
+                />
+            )
+        }
+        
+    }
+
+
   return (
     <>
             <Text 
@@ -133,17 +156,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price }) => {
                     >
                         {getValue()}
                     </Title>
-                    {
-                        (format === 'BTC' || format === 'ETH' || format === 'CAD') &&
-                        <Select
-                            variant='unstyled'
-                            size='sm'
-                            sx={{width: '70px',}}
-                            value={units}
-                            onChange={setUnits}
-                            data={getUnitSelectData()}
-                            />
-                    }
+                    <CurrencySelect />
                 </Group>
         <Group 
             direction={isMobile ? 'column' : 'row'} 
