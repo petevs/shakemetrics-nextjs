@@ -12,6 +12,7 @@ const DateRangeSelection = () => {
       dateRangeName,
       dateRangeList,
       tempDateRange,
+      minDate,
       handlePresetClick,
       handleDateChange,
       setEditing,
@@ -69,6 +70,7 @@ const DateRangeSelection = () => {
               clearable={false}
               amountOfMonths={isMobile ? 1 : 2}
               dropdownType={isMobile ? 'modal' : 'popover'}
+              minDate={minDate}
               maxDate={new Date()}
               onChange={(val) => handleDateChange(val)}
               onDropdownClose={() => setEditing(false)}

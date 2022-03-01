@@ -52,11 +52,14 @@ const useDateRange = () => {
         }
     }
 
+    const minDate = dayjs(snapshotList[0].date).toDate()
+
     return {
         dateRange,
         dateRangeName,
         dateRangeList,
         tempDateRange,
+        minDate,
         setEditing,
         setTempDateRange,
         handleDateChange,

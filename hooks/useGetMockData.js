@@ -3,7 +3,7 @@ import { functions } from '../firebase'
 
 const useGetMockData = () => {
 
-    const makeMockData = httpsCallable(functions, 'makeMockData')
+    const makeMockData = httpsCallable(functions, 'getMockShakeData')
 
     const getMockData = async () => {
 
