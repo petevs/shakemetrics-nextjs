@@ -129,6 +129,8 @@ const DbScorecard = ({ title, val, change, isMobile, format, price, familyKey })
                 />
             )
         }
+
+        return <></>
         
     }
 
