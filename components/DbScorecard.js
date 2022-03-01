@@ -113,7 +113,7 @@ const DbScorecard = ({ title, val, change, isMobile, format, price, familyKey })
 
     const CurrencySelect = () => {
 
-        if((familyKey === 'buySell')){
+        if((familyKey === 'buySell' || familyKey === 'historicalPrice')){
             return(<></>)
         }
 
