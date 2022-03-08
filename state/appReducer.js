@@ -86,6 +86,23 @@ export const initialAppState = {
         
         return snapshotCopy.slice(startIndex, endIndex + 1)
     },
+    transactions: function(){
+
+        if(!('transactions' in this.snapshots()[0])){ return }
+
+        const list = this.snapshots().reduce( ( previous, current ) => {
+
+            if(current.transactions.length > 0){
+                previous = [...previous, ...current.transactions]
+            }
+
+            return previous
+
+        }, [])
+
+        return list
+
+    },
     demo: true
 }
 

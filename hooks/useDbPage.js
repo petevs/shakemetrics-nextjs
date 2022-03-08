@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../state/GlobalContext'
 import { convertDateToFriendly } from '../helpers/dateRanges'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
+import { BiSkipPreviousCircle } from 'react-icons/bi'
 
 const useDbPage = ( details, slug ) => {
 
@@ -11,6 +12,9 @@ const useDbPage = ( details, slug ) => {
     const [familyKey, setFamilyKey] = useState(details.familyKey)
     const [parentKey, setParentKey] = useState(details.parentKeys[0].key)
     const [childKey, setChildKey] = useState(details.childKeys ? details.childKeys[0].key : details.childKeys)
+
+    console.log(state.transactions())
+
 
     useEffect(() => {
         setFamilyKey(details.familyKey)
