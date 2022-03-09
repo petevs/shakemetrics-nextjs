@@ -13,8 +13,6 @@ const useDbPage = ( details, slug ) => {
     const [parentKey, setParentKey] = useState(details.parentKeys[0].key)
     const [childKey, setChildKey] = useState(details.childKeys ? details.childKeys[0].key : details.childKeys)
 
-    console.log(state.transactions())
-
 
     useEffect(() => {
         setFamilyKey(details.familyKey)

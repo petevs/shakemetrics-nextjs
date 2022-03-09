@@ -2,6 +2,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
+import { getDatabase } from 'firebase/database'
 import { getStorage } from 'firebase/storage'
 import { getFunctions } from 'firebase/functions'
 import { getAnalytics, logEvent } from 'firebase/analytics'
@@ -29,6 +30,7 @@ const firebaseApp = createFirebaseApp(firebaseConfig)
 
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+const rtdb = getDatabase(firebaseApp)
 const storage = getStorage(firebaseApp);
 const functions = getFunctions(firebaseApp)
 
@@ -39,4 +41,4 @@ if(firebaseApp.name && typeof window !== 'undefined'){
 }
 
 
-export { db, auth, storage, functions, analytics };
+export { db, rtdb, auth, storage, functions, analytics };
