@@ -4,7 +4,8 @@ export const makeDummy = (snapshotObj) => {
 
     for (const date in snapshotObj) {
         snapshotList.push({
-            ...snapshotObj[date]
+            ...snapshotObj[date],
+            date: date
         })
     }
 
