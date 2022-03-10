@@ -136,7 +136,7 @@ const DbChart = ({ categories, series, chartFormat }) => {
                     height={isMobile ? '275px' : '400px'}
                 />
             }
-            {/* <Button onClick={() => getMockData()}>Get Mock Data</Button> */}
+            <Button onClick={() => getMockData()}>Get Mock Data</Button>
         </>
     )
 }

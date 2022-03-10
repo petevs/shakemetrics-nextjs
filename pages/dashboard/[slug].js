@@ -44,7 +44,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            details: dbPageContent[params.slug]
+            details: dbPageContent[params.slug],
         }
     }
 
@@ -60,7 +60,7 @@ const DbPage = (props) => {
 
     const router = useRouter()
     const { slug } = router.query
-    const { details } = props
+    const { details, dummyData } = props
 
     const {
         familyKey, setFamilyKey,
