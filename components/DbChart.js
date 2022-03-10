@@ -10,9 +10,6 @@ import useGetMockData from '../hooks/useGetMockData'
 import { data } from '../lib/dummyData'
 
 
-import { rtdb } from '../firebase'
-import { ref, set } from 'firebase/database'
-
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const DbChart = ({ categories, series, chartFormat }) => {
@@ -56,6 +53,8 @@ const DbChart = ({ categories, series, chartFormat }) => {
         }
     }
 
+    
+
     // const mobileTooltip = () => {
     //     if(isMobile){
     //         return {
@@ -73,12 +72,6 @@ const DbChart = ({ categories, series, chartFormat }) => {
     //             enabled: false
     //         }
     //     }
-    // }
-
-    // const writeToRTDB = () => {
-    //     set(ref(rtdb, 'snapshotObj'), {
-    //         ...data.snapshotObj
-    //     })
     // }
 
 

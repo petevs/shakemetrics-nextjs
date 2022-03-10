@@ -15,6 +15,10 @@ import { dashboardItems } from '../../lib/navItems'
 //Hooks
 import useDbPage from '../../hooks/useDbPage'
 
+//Firebase
+import { rtdb } from '../../firebase'
+import { ref, get, child } from 'firebase/database'
+
 //COMPONENTS
 import DashboardShell from '../../components/DashboardShell'
 import PageHeader from '../../components/PageHeader'
