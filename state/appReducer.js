@@ -28,7 +28,7 @@ export const initialAppState = {
             BTC: 0
         }
     },
-    results: {...data},
+    results: null,
     currentEntry: function(){
         const { snapshotObj, snapshotList } = this.results
         const endDate = convertDateToFriendly(this.dateRange[1])
