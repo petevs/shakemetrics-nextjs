@@ -1,34 +1,18 @@
 //NEXT
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 //MANTINE
-import { Paper, useMantineColorScheme } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Paper } from '@mantine/core'
 
 //Library
 import { dbPageContent } from '../../lib/dbPageContent'
 import { dashboardItems } from '../../lib/navItems'
 
-//Hooks
-import useDbPage from '../../hooks/useDbPage'
-
-//Firebase
-import { rtdb } from '../../firebase'
-import { ref, get, child } from 'firebase/database'
-
 //COMPONENTS
 import DashboardShell from '../../components/DashboardShell'
 import PageHeader from '../../components/PageHeader'
-import DbSelectionSection from '../../components/DbSelectionSection'
-import NoActivity from '../../components/NoActivity'
-import DbToggle from '../../components/DbToggle'
-import DbSelect from '../../components/DbSelect'
-import DbScorecard from '../../components/DbScorecard'
-import DbChart from '../../components/DbChart'
-import DemoNotification from '../../components/DemoNotification'
+import DbContentWrapper from '../../components/DbContentWrapper'
 
 
 export async function getStaticPaths(){
@@ -57,26 +41,9 @@ export async function getStaticProps({ params }) {
 
 const DbPage = (props) => {
 
-    const { colorScheme } = useMantineColorScheme();
-    const dark = colorScheme === 'dark';
-
-    const isMobile = useMediaQuery('(max-width: 755px)');
-
     const router = useRouter()
     const { slug } = router.query
-    const { details, dummyData } = props
-
-    const {
-        familyKey, setFamilyKey,
-        parentKey, setParentKey,
-        childKey, setChildKey,
-        noActivity,
-        toggle, menu,
-        dbToggleData, dbSelectData,
-        getTitle, endDate, currentValue, change, chartFormat,
-        series, categories,
-        price
-    } = useDbPage(details, slug)
+    const { details } = props
 
     return(
         <>
@@ -92,48 +59,7 @@ const DbPage = (props) => {
                     withBorder
                     padding='xl'
                 >
-                    <DbSelectionSection
-                        toggle={toggle}
-                        menu={menu}
-                    >
-                        {
-                            dbToggleData &&
-                            <DbToggle
-                                data={dbToggleData}
-                                parentKey={parentKey}
-                                setParentKey={setParentKey}
-                            />
-                        }
-                        {
-                            dbSelectData &&
-                            <DbSelect
-                                data={dbSelectData}
-                                childKey={menu === 'parent' ? parentKey : childKey}
-                                setChildKey={menu === 'parent' ? setParentKey : setChildKey}
-                            />
-                        }
-                    </DbSelectionSection>
-                    {
-                        noActivity 
-                        ? <NoActivity />
-                        : <>
-                            <DbScorecard
-                                endDate={endDate}
-                                title={getTitle()}
-                                val={currentValue}
-                                change={change}
-                                isMobile={isMobile}
-                                format={chartFormat}
-                                price={price}
-                                familyKey={familyKey}
-                            />
-                            <DbChart 
-                                categories={categories}
-                                series={series}
-                                chartFormat={chartFormat}
-                            />
-                        </>
-                    }
+                   <DbContentWrapper details={details} slug={slug} />
                 </Paper>
             </DashboardShell>
         </>
