@@ -1,4 +1,6 @@
 import { Box, Title, } from '@mantine/core'
+import { useContext } from 'react'
+import { GlobalContext } from '../state/GlobalContext'
 import DateRangeSelection from './DateRangeSelection'
 
 const PageHeader = ({title, icon}) => {
@@ -15,13 +17,19 @@ const PageHeader = ({title, icon}) => {
         }
     })
 
+    const { state } = useContext(GlobalContext)
+    const { results } = state
+
 
   return (
     <Box sx={style}>
         <Title color='dimmed' size='xl' weight={700}>
             {title}
         </Title>
-        <DateRangeSelection />
+        {
+          results &&
+          <DateRangeSelection />
+        }
     </Box>
   )
 }
