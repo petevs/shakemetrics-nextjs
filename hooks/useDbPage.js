@@ -4,7 +4,7 @@ import { convertDateToFriendly } from '../helpers/dateRanges'
 import { toBitcoin, toDollars } from '../helpers/currencyFormatters'
 import { BiSkipPreviousCircle } from 'react-icons/bi'
 
-const useDbPage = ( details, slug ) => {
+const useDbPage = ( details, slug, results ) => {
 
     const { state } = useContext(GlobalContext)
     const { dateRange, demo } = state
@@ -228,7 +228,8 @@ const useDbPage = ( details, slug ) => {
         dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change, chartFormat,
         series, categories,
-        price
+        price,
+        lastEntry
 
     }
 }

@@ -29,7 +29,8 @@ import DbSelect from '../../components/DbSelect'
 import DbScorecard from '../../components/DbScorecard'
 import DbChart from '../../components/DbChart'
 import DemoNotification from '../../components/DemoNotification'
-
+import { makeDummy } from '../../helpers/makeDummy'
+import ShakingSatsStats from '../../components/ShakingSatsStats'
 
 export async function getStaticPaths(){
     
@@ -64,7 +65,7 @@ const DbPage = (props) => {
 
     const router = useRouter()
     const { slug } = router.query
-    const { details, dummyData } = props
+    const { details, dummyData, results } = props
 
     const {
         familyKey, setFamilyKey,
@@ -75,8 +76,9 @@ const DbPage = (props) => {
         dbToggleData, dbSelectData,
         getTitle, endDate, currentValue, change, chartFormat,
         series, categories,
-        price
-    } = useDbPage(details, slug)
+        price,
+        lastEntry
+    } = useDbPage(details, slug, results)
 
     return(
         <>
@@ -135,6 +137,10 @@ const DbPage = (props) => {
                         </>
                     }
                 </Paper>
+                <ShakingSatsStats
+                    familyKey={familyKey}
+                    stats={lastEntry.shakingSats}
+                />
             </DashboardShell>
         </>
     )
